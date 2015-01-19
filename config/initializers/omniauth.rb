@@ -1,6 +1,8 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   # TODO - change website and callback URL to production URL's in twitter dev center
   # TODO - hide ids and secret keys
-  provider :twitter, 'cEDcqhwMRltJAsAfQn8NrDL29', '0Yc9dQDDaYfOB9fWN9MreQHzWn5c6qwIshNDd540QACctL9Fps'
-  provider :facebook, '404934306332466', '0d978446ad82c77fd8785f04143f8a6a'
+  secrets = Rails.application.secrets
+  provider :twitter, secrets.twitter_app_id, secrets.twitter_secret_key
+  provider :facebook, secrets.facebook_app_id, secrets.facebook_secret_key
+  provider :vkontakte, secrets.vkontakte_app_id, secrets.vkontakte_secret_key
 end
