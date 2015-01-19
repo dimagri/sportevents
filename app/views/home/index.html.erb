@@ -1,11 +1,16 @@
 <h1>Домашняя страница</h1>
 
+<script>
+    clearAdressLineGarbage();
+</script>
+
 <% if current_user %>
     Привет, <b><%= current_user.name %></b>
     <%= link_to 'Выйти', signout_path %>
 <% else %>
     Войти с помощью:
     <ul>
+        <li><%= link_to 'Фейсбук', '/auth/facebook' %></li>
         <li><%= link_to 'Твиттер', '/auth/twitter' %></li>
     </ul>
 <% end %>

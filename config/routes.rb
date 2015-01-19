@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
-  get '/auth/twitter/callback' => 'sessions#create'
+  # Authorization via facebook and twitter
+  get '/auth/:provider/callback' => 'sessions#create'
   get 'signout' => 'sessions#destroy'
 end
