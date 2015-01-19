@@ -1,0 +1,11 @@
+<h1>Домашняя страница</h1>
+
+<% if current_user %>
+    Привет, <b><%= current_user.name %></b>
+    <%= link_to 'Выйти', signout_path %>
+<% else %>
+    Войти с помощью:
+    <ul>
+        <li><%= link_to 'Твиттер', '/auth/twitter' %></li>
+    </ul>
+<% end %>
