@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
-  # Authorization via facebook and twitter
+  # Authorization
   get '/auth/:provider/callback' => 'sessions#create'
-  get 'signout' => 'sessions#destroy'
+  post '/auth/:provider/callback' => 'sessions#create'
+  get 'logout' => 'sessions#destroy'
+  get '/auth/failure' => 'sessions#failure'
+  resources :identities
 end

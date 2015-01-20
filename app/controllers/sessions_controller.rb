@@ -11,4 +11,8 @@ class SessionsController < ApplicationController
     reset_session
     redirect_to root_path
   end
+
+  def failure
+    redirect_to root_path, alert: 'Неудачный вход'
+  end
 end

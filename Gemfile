@@ -26,9 +26,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'annotate'
 
+# To use ActiveModel has_secure_password
+gem 'bcrypt-ruby'
+
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
+gem 'omniauth-identity'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
