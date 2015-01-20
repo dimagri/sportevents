@@ -11,7 +11,6 @@
 #
 
 class Identity < OmniAuth::Identity::Models::ActiveRecord
-  # TODO add "validates_associated" to profile model
 
   validates :name, :email, :password_digest, presence: true
   validates :name, length: { minimum: 3 }
