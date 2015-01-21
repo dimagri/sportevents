@@ -1,0 +1,37 @@
+<div>
+  <%= form_for(@user) do |f| %>
+      <div class="field">
+        <%= f.label 'Логин*' %><br>
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Полное имя' %><br>
+        <%= f.text_field :full_name %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Email' %><br>
+        <%= f.text_field :email %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Коротко о себе' %><br>
+        <%= f.text_area :about %>
+      </div>
+
+      <div class="field">
+        <<%= f.label 'Номер телефона' %><br>
+        <%= f.text_field :phone, value: '0*********' %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Skype' %><br>
+        <%= f.text_field :skype %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit 'ОК'%>
+      </div>
+  <% end %>
+</div>

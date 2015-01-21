@@ -1,0 +1,9 @@
+<div>
+  <b>Логин:</b> <%= @user.name %><br/>
+  <b>Полное имя:</b> <%= @user.full_name %><br/>
+  <b>Email:</b> <%= @user.email %><br/>
+  <b>О себе:</b> <%= @user.about %><br/>
+  <b>Номер телефона:</b> <%= @user.phone %><br/>
+  <b>Скайп:</b> <%= @user.skype %><br/>
+</div>
+<%= link_to 'Редактировать профиль', edit_user_path if current_user == @user %>

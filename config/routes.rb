@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
+  resources :users, only: [ :show, :edit, :update ]
+
   # Authorization
   get '/auth/:provider/callback' => 'sessions#create'
   post '/auth/:provider/callback' => 'sessions#create'
