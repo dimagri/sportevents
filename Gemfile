@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'annotate'
 
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby'
+gem 'bcrypt'
 
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'

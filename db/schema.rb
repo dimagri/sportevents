@@ -16,6 +16,20 @@ ActiveRecord::Schema.define(version: 20150120182120) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "c_types", force: :cascade do |t|
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "club_types", force: :cascade do |t|
+    t.integer  "club_id"
+    t.integer  "c_type_id"
+    t.string   "subtype"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "clubs", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
