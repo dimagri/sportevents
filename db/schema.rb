@@ -11,35 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121103747) do
+ActiveRecord::Schema.define(version: 20150123110442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "c_types", force: :cascade do |t|
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "club_types", force: :cascade do |t|
-    t.integer  "club_id"
-    t.integer  "c_type_id"
-    t.string   "subtype"
+    t.string   "name"
+    t.integer  "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "clubs", force: :cascade do |t|
+    t.integer  "club_type_id"
+    t.integer  "user_id"
     t.string   "name"
     t.text     "description"
-    t.string   "adress"
     t.integer  "price"
-    t.integer  "author"
-    t.integer  "phone"
-    t.boolean  "confermed",   default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "phone"
+    t.boolean  "confirmed"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "identities", force: :cascade do |t|

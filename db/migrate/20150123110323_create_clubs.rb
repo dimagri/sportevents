@@ -1,13 +1,13 @@
 class CreateClubs < ActiveRecord::Migration
   def change
     create_table :clubs do |t|
+      t.integer :club_type_id
+      t.integer :user_id
       t.string :name
       t.text :description
-      t.string :adress
       t.integer :price
-      t.integer :author
-      t.integer :phone
-      t.boolean :confermed, default: false
+      t.string :phone
+      t.boolean :confirmed
 
       t.timestamps null: false
     end

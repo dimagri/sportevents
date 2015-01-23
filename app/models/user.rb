@@ -17,6 +17,8 @@
 
 class User < ActiveRecord::Base
 
+  has_many :clubs
+
   before_create :set_user_email_by_identity
 
   validates :provider, :uid, :name, presence: true
