@@ -1,3 +1,5 @@
+#host: localhost
+
 # PostgreSQL. Versions 8.2 and up are supported.
 #
 # Install the pg driver:
@@ -15,7 +17,7 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
@@ -80,6 +82,7 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
   database: sportevents_production
   username: sportevents
   password: <%= ENV['SPORTEVENTS_DATABASE_PASSWORD'] %>

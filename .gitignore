@@ -38,3 +38,8 @@ bower.json
 
 # Ignore local asset pipline cache files
 /public/assets
+
+/logfile
+
+/sportevents_development
+/sportevents_test
