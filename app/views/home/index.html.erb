@@ -44,11 +44,27 @@
         id: 'examples.map-i875mjb7'
     }).addTo(map);
 
+    var marker, location;
+    function onMapClick(e) {
+        marker = new L.Marker(e.latlng, { draggable:true });
+        map.addLayer(marker);
+        location.lat = e.latlng.lat;
+        location.lng = e.latlng.lng;
+        alert(location.lat + ', ' + location.lng);
+        $.ajax({
+            url: "/get_location",
+            type: "post",
+            data : 'latitude=' + location.lat + '&longitude=' + location.lng
+        });
+    };
 
     <% for location in Location.all %>
         L.marker(<%= [location.latitude, location.longitude] %>).addTo(map)
                 .bindPopup("<b><%= location.club.name %></b><br/>Категория: <%= location.club.type.name %>");
     <% end %>
 
+    map.on('click', onMapClick);
+
 </script>
 
+<div id="location"></div>

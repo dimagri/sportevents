@@ -1,0 +1,23 @@
+<div class="form">
+  <%= form_for(@post) do |f| %>
+
+      <div class="field">
+        <h3><%= f.label 'Название секции' %><br></h3>
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <h3><%= f.label 'Описание' %><br></h3>
+        <%= f.text_area :description %>
+      </div>
+
+      <div class="field">
+        <h3><%= f.label 'Теги' %></h3><br>
+        <%= f.text_field :tags, size: "50" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit 'ОК'%>
+      </div>
+  <% end %>
+</div>
