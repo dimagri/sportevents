@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123110442) do
+ActiveRecord::Schema.define(version: 20150125150911) do
 
   create_table "c_types", force: :cascade do |t|
     t.string   "type"
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 20150123110442) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.integer  "club_id"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
