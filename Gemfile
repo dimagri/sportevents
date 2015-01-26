@@ -9,13 +9,11 @@ group :development do
   # Use sqlite3 in development as the database for Active Record
   gem 'sqlite3'
 end
-group :development do
+group :production do
   # Use postgresql in production as the database for Active Record
   gem 'pg'
 end
 
-# Use postgresql as the database for Active Record
-gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
