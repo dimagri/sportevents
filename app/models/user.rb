@@ -35,7 +35,9 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth.provider
       user.uid = auth.uid
-      user.name = auth['info']['name'].to_s.split(' ').join('_').downcase # format user name
+      # format user name
+      name = Translit.convert(auth['info']['name']).delete('\'')
+      user.name = name.split(' ').join('_').downcase
     end
   end
 
