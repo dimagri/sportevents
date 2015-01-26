@@ -15,7 +15,7 @@
 
     <% for club in Club.all %>
     L.marker(<%= [club.location.latitude, club.location.longitude] %>).addTo(map)
-            .bindPopup("<b><%= club.name %></b><br/>Категория: <%= club.type.name %>");
+            .bindPopup("<b><a href='<%= club_path(club) %>'><%= club.name %></a></b><br/>Категория: <%= club.type.name %>");
     <% end %>
 
 </script>

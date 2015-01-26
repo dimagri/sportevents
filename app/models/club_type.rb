@@ -14,4 +14,6 @@ class ClubType < ActiveRecord::Base
   has_many :clubs
   belongs_to :parent, class_name: 'ClubType', foreign_key: 'parent_id'
 
+  validates :name, presence: true
+
 end

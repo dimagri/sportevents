@@ -2,6 +2,7 @@ class ClubsController < ApplicationController
 
   before_action :set_club, only: [ :show ]
   before_action :create_club_location, only: :create
+  before_action :check_user, only: :new
 
   def index
   end
@@ -14,12 +15,8 @@ class ClubsController < ApplicationController
     @club = Club.new(club_params)
     @club.author = current_user
     @club.location = @location
-    puts
-    puts params[:location]
-    puts
     respond_to do |format|
       if @club.save
-        # format.html { redirect_to @club, notice: 'Секция была добавлена' }
         format.html { redirect_to @club, notice: 'Секция была добавлена' }
       else
         format.html { redirect_to :back, alert: 'Возникли ошибки' }
@@ -41,8 +38,13 @@ class ClubsController < ApplicationController
   end
 
   def create_club_location
+    redirect_to :back, alert: 'Поставьте метку на карте' unless params[:location].present?
     loc_params = params[:location].split(' ')
     @location = Location.create(latitude: loc_params[0], longitude: loc_params[1])
+  end
+
+  def check_user
+    redirect_to root_path, alert: 'Сначала зарегистрируйтесь' unless current_user.present?
   end
 
 end
