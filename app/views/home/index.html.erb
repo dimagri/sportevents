@@ -30,41 +30,6 @@
     </p>
 <% end %>
 
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<%= render 'locations/show_clubs_map' %>
 
-<div id="map" style="height: 400px; width: 600px"></div>
-
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-<script>
-    var map = L.map('map').setView([49.437820, 32.058959], 13);
-
-    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: 'Карта всех секций',
-        id: 'examples.map-i875mjb7'
-    }).addTo(map);
-
-    var marker, location;
-    function onMapClick(e) {
-        marker = new L.Marker(e.latlng, { draggable:true });
-        map.addLayer(marker);
-        location.lat = e.latlng.lat;
-        location.lng = e.latlng.lng;
-        alert(location.lat + ', ' + location.lng);
-        $.ajax({
-            url: "/get_location",
-            type: "post",
-            data : 'latitude=' + location.lat + '&longitude=' + location.lng
-        });
-    };
-
-    <% for location in Location.all %>
-        L.marker(<%= [location.latitude, location.longitude] %>).addTo(map)
-                .bindPopup("<b><%= location.club.name %></b><br/>Категория: <%= location.club.type.name %>");
-    <% end %>
-
-    map.on('click', onMapClick);
-
-</script>
-
-<div id="location"></div>
+<%= link_to 'Добавить секцию', new_club_path %>

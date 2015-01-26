@@ -1,0 +1,9 @@
+<div>
+  <%= render 'locations/show_location' %>
+  <b>Название секции:</b> <%= @club.name %><br/>
+  <b>Категория:</b> <%= @club.type.name %><br/>
+  <b>Описание:</b> <%= @club.description %><br/>
+  <b>Стоимость:</b> <%= @club.description %><br/>
+  <b>Контактный номер:</b> <%= @club.phone %><br/>
+  <b>Добавил:</b> <u><%= link_to @club.author.name, @club.author %></u><br/>
+</div>

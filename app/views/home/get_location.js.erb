@@ -1,1 +1,2 @@
-$('#location').text('<%= @location[:latitude] + ' ' + @location[:longitude] %>');
+//$('#location').text('<%= @location[:latitude] + ' ' + @location[:longitude] %>');
+$('#location').html('<%= hidden_field_tag :location, [ @location[:latitude], @location[:longitude] ] %>');

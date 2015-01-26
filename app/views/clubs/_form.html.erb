@@ -1,9 +1,19 @@
 <div class="form">
-  <%= form_for(@post) do |f| %>
+  <%= form_for(@club) do |f| %>
+
+      <%= render 'locations/add_location' %>
+
+      <div id="location">
+      </div>
 
       <div class="field">
         <h3><%= f.label 'Название секции' %><br></h3>
         <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <h3><%= f.label 'Категория' %><br></h3>
+        <%= collection_radio_buttons(:club, :club_type_id, ClubType.all, :id, :name) %>
       </div>
 
       <div class="field">
@@ -12,8 +22,13 @@
       </div>
 
       <div class="field">
-        <h3><%= f.label 'Теги' %></h3><br>
-        <%= f.text_field :tags, size: "50" %>
+        <h3><%= f.label 'Стоимость' %></h3><br>
+        <%= f.text_field :price %>
+      </div>
+
+      <div class="field">
+        <h3><%= f.label 'Контактный номер' %></h3><br>
+        <%= f.text_field :phone %>
       </div>
 
       <div class="actions">
