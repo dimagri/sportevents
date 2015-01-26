@@ -14,6 +14,9 @@
 
     var marker, location;
     function onMapClick(e) {
+        if (marker != null) {
+            map.removeLayer(marker);
+        }
         marker = new L.Marker(e.latlng, { draggable:true });
         map.addLayer(marker);
         location.lat = e.latlng.lat;
