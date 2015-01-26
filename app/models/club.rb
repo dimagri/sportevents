@@ -16,8 +16,6 @@
 
 class Club < ActiveRecord::Base
 
-  # TODO add validations
-
   belongs_to :type, class_name: 'ClubType', foreign_key: 'club_type_id'
   belongs_to :author, class_name: 'User', foreign_key: 'user_id'
   has_one :location

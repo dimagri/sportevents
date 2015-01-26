@@ -7,27 +7,27 @@
       </div>
 
       <div class="field">
-        <h3><%= f.label 'Название секции' %><br></h3>
+        <%= f.label 'Название секции' %><br>
         <%= f.text_field :name %>
       </div>
 
       <div class="field">
-        <h3><%= f.label 'Категория' %><br></h3>
+        <%= f.label 'Категория' %><br>
         <%= collection_radio_buttons(:club, :club_type_id, ClubType.all, :id, :name) %>
       </div>
 
       <div class="field">
-        <h3><%= f.label 'Описание' %><br></h3>
+        <%= f.label 'Описание' %><br>
         <%= f.text_area :description %>
       </div>
 
       <div class="field">
-        <h3><%= f.label 'Стоимость' %></h3><br>
+        <%= f.label 'Стоимость' %><br>
         <%= f.text_field :price %>
       </div>
 
       <div class="field">
-        <h3><%= f.label 'Контактный номер' %></h3><br>
+        <%= f.label 'Контактный номер' %><br>
         <%= f.text_field :phone %>
       </div>
 

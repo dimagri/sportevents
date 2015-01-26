@@ -1,17 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'clubs/index'
-
-  get 'clubs/new'
-
-  get 'clubs/create'
-
-  get 'clubs/edit'
-
-  get 'clubs/update'
-
   root 'home#index'
-
   get 'home/index'
 
   resources :users, only: [ :show, :edit, :update ]
@@ -24,5 +13,5 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
   resources :identities
 
-  post '/get_location' => 'home#get_location'
+  post '/get_location' => 'locations#get_location'
 end

@@ -38,7 +38,10 @@ class ClubsController < ApplicationController
   end
 
   def create_club_location
-    redirect_to :back, alert: 'Поставьте метку на карте' unless params[:location].present?
+    if params[:location].nil?
+      redirect_to :back, alert: 'Поставьте метку на карте'
+      return
+    end
     loc_params = params[:location].split(' ')
     @location = Location.create(latitude: loc_params[0], longitude: loc_params[1])
   end

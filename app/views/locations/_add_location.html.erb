@@ -18,7 +18,6 @@
         map.addLayer(marker);
         location.lat = e.latlng.lat;
         location.lng = e.latlng.lng;
-//        alert(location.lat + ', ' + location.lng);
         $.ajax({
             url: "/get_location",
             type: "post",
