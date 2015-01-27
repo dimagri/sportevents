@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'Профиль успешно изменён' }
       else
-        format.html { redirect_to :back, alert: 'Возникли ошибки' }
+        format.html { render :edit }
       end
     end
   end

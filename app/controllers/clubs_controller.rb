@@ -19,7 +19,7 @@ class ClubsController < ApplicationController
       if @club.save
         format.html { redirect_to @club, notice: 'Секция была добавлена' }
       else
-        format.html { redirect_to :back, alert: 'Возникли ошибки' }
+        format.html { render :new }
       end
     end
   end

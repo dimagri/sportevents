@@ -1,0 +1,22 @@
+ru:
+  activerecord:
+    models:
+      user: Пользователь
+    attributes:
+      user:
+        name: 'Логин'
+        full_name: 'Полное имя'
+        about: 'О себе'
+        phone: 'Номер телефона'
+        password: 'Пароль'
+        full_name: 'Полное имя'
+      identity:
+        name: 'Логин'
+        password: 'Пароль'
+        password_digest: 'Подтверждение'
+      club:
+        club_type_id: 'Категория'
+        name: 'Название'
+        description: 'Описание'
+        price: 'Цена'
+        phone: 'Номер телефона'

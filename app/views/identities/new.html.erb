@@ -3,10 +3,10 @@
 <%= form_tag '/auth/identity/register' do %>
     <% if @identity && @identity.errors.any? %>
         <div class="error_messages">
-          <h2><%= pluralize(@identity.errors.count, 'error') %> возникли ошибки:</h2>
+          <h2>Возникли ошибки(<%= @identity.errors.count %>):</h2>
           <ul>
             <% @identity.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
+                <li>Поле <%= msg %></li>
             <% end %>
           </ul>
         </div>

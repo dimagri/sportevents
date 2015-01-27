@@ -1,5 +1,17 @@
 <div>
   <%= form_for(@user) do |f| %>
+
+      <% if @user && @user.errors.any? %>
+          <div class="error_messages">
+            <h2>Возникли ошибки(<%= @user.errors.count %>):</h2>
+            <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                  <li>Поле <%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
       <div class="field">
         <%= f.label 'Логин*' %><br>
         <%= f.text_field :name %>
@@ -21,7 +33,7 @@
       </div>
 
       <div class="field">
-        <<%= f.label 'Номер телефона (0*********)' %><br>
+        <%= f.label 'Номер телефона (0*********)' %><br>
         <%= f.text_field :phone %>
       </div>
 
