@@ -25,7 +25,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'geocoder'
 
-gem 'translit'
+gem 'russian'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

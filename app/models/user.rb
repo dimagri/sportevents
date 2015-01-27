@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       # format user name
-      name = Translit.convert(auth['info']['name']).delete('\'')
+      name = Russian::transliterate(auth['info']['name']).delete('\'')
       user.name = name.split(' ').join('_').downcase
     end
   end
