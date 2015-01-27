@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125150911) do
+ActiveRecord::Schema.define(version: 20150127095847) do
 
   create_table "c_types", force: :cascade do |t|
     t.string   "type"
@@ -59,13 +59,14 @@ ActiveRecord::Schema.define(version: 20150125150911) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "full_name"
     t.string   "email"
     t.text     "about"
     t.string   "phone"
     t.string   "skype"
+    t.boolean  "admin",      default: false
   end
 
 end
