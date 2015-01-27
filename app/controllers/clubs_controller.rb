@@ -1,8 +1,9 @@
 class ClubsController < ApplicationController
 
-  before_action :set_club, only: [ :show ]
-  before_action :create_club_location, only: :create
-  before_action :check_user, only: :new
+  before_action :set_club, only: [ :show, :edit, :update ]
+  before_action :create_club_location, only: [ :create, :update ]
+  before_action :check_current_user, only: :new
+  before_action :check_club_author, only: :edit
 
   def index
   end
@@ -27,6 +28,19 @@ class ClubsController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @club.update_attributes(club_params) && @club.update_attributes(location: @location)
+        format.html { redirect_to @club, notice: 'Секция была изменена' }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
+
   private
 
   def set_club
@@ -46,8 +60,14 @@ class ClubsController < ApplicationController
     @location = Location.create(latitude: loc_params[0], longitude: loc_params[1])
   end
 
-  def check_user
+  def check_current_user
     redirect_to root_path, alert: 'Сначала зарегистрируйтесь' unless current_user.present?
+  end
+
+  def check_club_author
+    unless @club.author == current_user || current_user.admin?
+      redirect_to @club, alert: 'Вы не можете внести изменения в эту секцию'
+    end
   end
 
 end

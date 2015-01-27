@@ -3,7 +3,8 @@
   <b>Название секции:</b> <%= @club.name %><br/>
   <b>Категория:</b> <%= @club.type.name %><br/>
   <b>Описание:</b> <%= @club.description %><br/>
-  <b>Стоимость:</b> <%= @club.description %><br/>
+  <b>Стоимость:</b> <%= @club.price %><br/>
   <b>Контактный номер:</b> <%= @club.phone %><br/>
   <b>Добавил:</b> <u><%= link_to @club.author.name, @club.author %></u><br/>
 </div>
+<%= link_to 'Редактировать секцию', edit_club_path if current_user == @club.author || current_user.admin? %>
