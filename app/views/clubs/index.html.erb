@@ -1,0 +1,6 @@
+<% @clubs.all.each do |club|%>
+    Название: <%= link_to club.name, club_path(club) %><br/>
+    Описание: <%= club.description %><br/>
+    Добавил: <%= club.author.name %><br/>
+    <hr/>
+<% end  %>

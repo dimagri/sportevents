@@ -6,6 +6,7 @@ class ClubsController < ApplicationController
   before_action :check_club_author, only: :edit
 
   def index
+    @clubs = Club.all
   end
 
   def new
