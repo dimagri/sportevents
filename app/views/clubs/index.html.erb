@@ -1,3 +1,12 @@
+<%= render 'locations/show_clubs_map' %>
+
+<% @club_types.each do |ct| %>
+    <%= link_to ct.name, clubs_path(club_type: ct) %><br/>
+<% end %>
+<br/>
+
+<b><%= @message %></b><br/>
+
 <% @clubs.all.each do |club|%>
     Название: <%= link_to club.name, club_path(club) %><br/>
     Описание: <%= club.description %><br/>

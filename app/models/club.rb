@@ -24,4 +24,8 @@ class Club < ActiveRecord::Base
   validates :name, presence: true, length: { minimum: 5 }
   validates :description, presence: true, length: { minimum: 20 }
   validates :phone, presence: true
+
+  scope :confirmed, -> { where(confirmed: true) }
+  scope :unconfirmed, -> { where(confirmed: false) }
+  scope :search_by_type, ->(type) { where(type: type) }
 end

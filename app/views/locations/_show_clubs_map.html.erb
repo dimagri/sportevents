@@ -13,7 +13,7 @@
         id: 'examples.map-i875mjb7'
     }).addTo(map);
 
-    <% Club.all.each do |club| %>
+    <% @clubs.each do |club| %>
     L.marker(<%= [club.location.latitude, club.location.longitude] %>).addTo(map)
             .bindPopup("<b><a href='<%= club_path(club) %>'><%= club.name %></a></b><br/>Категория: <%= club.type.name %>");
     <% end %>

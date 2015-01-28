@@ -6,7 +6,15 @@ class ClubsController < ApplicationController
   before_action :check_club_author, only: :edit
 
   def index
-    @clubs = Club.all
+    if params[:club_type].present?
+      @clubs = Club.search_by_type(params[:club_type])
+      @message = "Результаты поиска секций по категории \"#{@clubs.first.type.name}\""
+    else
+      @clubs = Club.confirmed
+      @message = "Все секции"
+    end
+
+    @club_types = ClubType.all
   end
 
   def new
