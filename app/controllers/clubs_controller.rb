@@ -5,25 +5,26 @@ class ClubsController < ApplicationController
   before_action :check_current_user, only: :new
   before_action :check_club_author, only: :edit
 
-  # TODO add @map_title
   def index
     if params[:search_by_type].present?
       @clubs = Club.search_by_type(params[:search_by_type])
       if @clubs.any?
         @message = "Результаты поиска секций по категории \"#{@clubs.first.type.name}\""
       else
-        @message = "Пока нет секций в этой категории"
+        @message = 'Пока нет секций в этой категории'
       end
+      @map_title = "Секции с категорией \"#{@clubs.first.type.name}\""
     elsif params[:search_by_name].present?
       @clubs = Club.search_by_name(params[:search_by_name])
       if @clubs.any?
         @message = "Результаты поиска секций по запросу \"#{params[:search_by_name]}\""
       else
-        @message = "Нет таких секций"
+        @message = 'Нет таких секций'
       end
+      @map_title = 'Найденные секции'
     else
       @clubs = Club.confirmed
-      @message = "Все секции"
+      @map_title = 'Все секции'
     end
 
     @club_types = ClubType.all
@@ -39,7 +40,7 @@ class ClubsController < ApplicationController
     @club.location = @location
     respond_to do |format|
       if @club.save
-        format.html { redirect_to @club, notice: 'Секция была добавлена' }
+        format.html { redirect_to @club, notice: 'Секция будет добавлена после прохождения модерации' }
       else
         format.html { render :new }
       end

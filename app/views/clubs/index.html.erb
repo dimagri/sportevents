@@ -1,5 +1,7 @@
 <%= render 'locations/show_clubs_map' %>
 
+<%= link_to 'Добавить секцию', new_club_path if current_user %><br/>
+
 Категории:<br/>
 <% @club_types.each do |ct| %>
     <%= link_to ct.name, clubs_path(search_by_type: ct) %><br/>
