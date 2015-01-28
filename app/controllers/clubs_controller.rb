@@ -5,10 +5,22 @@ class ClubsController < ApplicationController
   before_action :check_current_user, only: :new
   before_action :check_club_author, only: :edit
 
+  # TODO add @map_title
   def index
-    if params[:club_type].present?
-      @clubs = Club.search_by_type(params[:club_type])
-      @message = "Результаты поиска секций по категории \"#{@clubs.first.type.name}\""
+    if params[:search_by_type].present?
+      @clubs = Club.search_by_type(params[:search_by_type])
+      if @clubs.any?
+        @message = "Результаты поиска секций по категории \"#{@clubs.first.type.name}\""
+      else
+        @message = "Пока нет секций в этой категории"
+      end
+    elsif params[:search_by_name].present?
+      @clubs = Club.search_by_name(params[:search_by_name])
+      if @clubs.any?
+        @message = "Результаты поиска секций по запросу \"#{params[:search_by_name]}\""
+      else
+        @message = "Нет таких секций"
+      end
     else
       @clubs = Club.confirmed
       @message = "Все секции"

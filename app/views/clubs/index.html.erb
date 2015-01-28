@@ -1,9 +1,12 @@
 <%= render 'locations/show_clubs_map' %>
 
+Категории:<br/>
 <% @club_types.each do |ct| %>
-    <%= link_to ct.name, clubs_path(club_type: ct) %><br/>
+    <%= link_to ct.name, clubs_path(search_by_type: ct) %><br/>
 <% end %>
 <br/>
+
+<%= render 'search' %>
 
 <b><%= @message %></b><br/>
 

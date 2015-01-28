@@ -28,4 +28,5 @@ class Club < ActiveRecord::Base
   scope :confirmed, -> { where(confirmed: true) }
   scope :unconfirmed, -> { where(confirmed: false) }
   scope :search_by_type, ->(type) { where(type: type) }
+  scope :search_by_name, ->(name) { where('name LIKE ?', "%#{name}%") }
 end
