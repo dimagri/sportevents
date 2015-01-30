@@ -22,7 +22,13 @@ class Event < ActiveRecord::Base
   validates :user_id, :event_type_id, presence: true
   validates :name, presence: true, length: { minimum: 5 }
   validates :description, presence: true, length: { minimum: 20 }
-  validates :phone, :begins_at, presence: true
+  validates :begins_at, presence: true, date: {
+                          after: Proc.new { Time.now },
+                          before: Proc.new { Time.now + 1.year },
+                          message: 'содержит неверное значение'
+                      }
+  validates :phone, presence: true
+
 
   scope :search_by_type, ->(type) { where(type: type) }
   scope :search_by_name, ->(name) { where('name LIKE ?', "%#{name}%") }

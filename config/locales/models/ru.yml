@@ -26,3 +26,4 @@ ru:
         description: 'Описание'
         date: 'Дата'
         phone: 'Номер телефона'
+        begins_at: 'Дата'

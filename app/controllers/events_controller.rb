@@ -71,12 +71,12 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :event_type_id, :description, :date, :phone)
+    params.require(:event).permit(:name, :event_type_id, :description, :begins_at, :phone)
   end
 
   def create_event_location
     if params[:location].nil?
-      redirect_to :back, alert: 'Поставьте метку на карте'
+      redirect_to new_event_path, alert: 'Поставьте метку на карте'
       return
     end
     loc_params = params[:location].split(' ')

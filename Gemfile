@@ -38,6 +38,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'annotate'
 
+gem 'date_validator'
+
 # To use ActiveModel has_secure_password
 gem 'bcrypt'
 

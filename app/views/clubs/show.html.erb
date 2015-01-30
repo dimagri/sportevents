@@ -1,10 +1,10 @@
 <div>
   <%= render 'locations/show_location' %>
-  <b>Название секции:</b> <%= @event.name %><br/>
-  <b>Категория:</b> <%= @event.type.name %><br/>
-  <b>Описание:</b> <%= @event.description %><br/>
-  <b>Стоимость:</b> <%= @event.price %><br/>
-  <b>Контактный номер:</b> <%= @event.phone %><br/>
-  <b>Добавил:</b> <u><%= link_to @event.author.name, @event.author %></u><br/>
+  <b>Название секции:</b> <%= @club.name %><br/>
+  <b>Категория:</b> <%= @club.type.name %><br/>
+  <b>Описание:</b> <%= @club.description %><br/>
+  <b>Стоимость:</b> <%= @club.price %><br/>
+  <b>Контактный номер:</b> <%= @club.phone %><br/>
+  <b>Добавил:</b> <u><%= link_to @club.author.name, @club.author %></u><br/>
 </div>
 <%= link_to 'Редактировать секцию', edit_club_path if current_user == @club.author || current_user.admin? %>
