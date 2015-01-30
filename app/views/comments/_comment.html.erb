@@ -1,3 +1,7 @@
 <br/>
-<b>Добавил</b>: <%= comment.user.name %><br/>
-<%= comment.body %><br/><hr/>
+<div style="width: 300px;">
+  <b><%= comment.user.name %></b>
+  <span style="float: right"><%= format_date(comment.created_at) %></span>
+  <br/>
+  <%= comment.body %>
+</div>
