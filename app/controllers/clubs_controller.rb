@@ -48,6 +48,9 @@ class ClubsController < ApplicationController
   end
 
   def show
+    @commentable = @club
+    @comments = @commentable.comments
+    @comment = Comment.new
   end
 
   def edit

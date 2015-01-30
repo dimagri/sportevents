@@ -3,11 +3,13 @@
 # Table name: locations
 #
 #  id         :integer          not null, primary key
-#  adress     :string
+#  club_id    :integer
+#  address    :string
 #  latitude   :float
 #  longitude  :float
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  event_id   :integer
 #
 
 class Location < ActiveRecord::Base

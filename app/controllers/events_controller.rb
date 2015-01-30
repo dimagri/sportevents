@@ -49,6 +49,9 @@ class EventsController < ApplicationController
   end
 
   def show
+    @commentable = @event
+    @comments = @commentable.comments
+    @comment = Comment.new
   end
 
   def edit

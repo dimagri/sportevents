@@ -6,13 +6,14 @@
 #  provider   :string
 #  uid        :string
 #  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #  full_name  :string
 #  email      :string
 #  about      :text
 #  phone      :string
 #  skype      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  admin      :boolean          default("f")
 #
 
 class User < ActiveRecord::Base

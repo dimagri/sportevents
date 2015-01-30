@@ -8,3 +8,6 @@
   <b>Добавил:</b> <u><%= link_to @event.author.name, @event.author %></u><br/>
 </div>
 <%= link_to 'Редактировать событие', edit_event_path if current_user == @event.author || current_user.admin? %>
+
+<%= render 'comments/form' %>
+<%= render 'comments/comments' %>

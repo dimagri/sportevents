@@ -21,7 +21,7 @@
     <% else %>
         <% @events.each do |event| %>
             L.marker(<%= [event.location.latitude, event.location.longitude] %>).addTo(map)
-                    .bindPopup("<b><a href='<%= club_path(event) %>'><%= event.name %></a></b><br/>Категория: <%= event.type.name %>");
+                    .bindPopup("<b><a href='<%= event_path(event) %>'><%= event.name %></a></b><br/>Категория: <%= event.type.name %>");
         <% end %>
     <% end %>
 

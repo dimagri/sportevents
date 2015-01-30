@@ -8,3 +8,6 @@
   <b>Добавил:</b> <u><%= link_to @club.author.name, @club.author %></u><br/>
 </div>
 <%= link_to 'Редактировать секцию', edit_club_path if current_user == @club.author || current_user.admin? %>
+
+<%= render 'comments/form' %>
+<%= render 'comments/comments' %>

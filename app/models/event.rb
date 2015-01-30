@@ -7,10 +7,10 @@
 #  user_id       :integer
 #  name          :string
 #  description   :text
-#  date          :string
 #  phone         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  begins_at     :datetime
 #
 
 class Event < ActiveRecord::Base
@@ -18,6 +18,7 @@ class Event < ActiveRecord::Base
   belongs_to :type, class_name: 'EventType', foreign_key: 'event_type_id'
   belongs_to :author, class_name: 'User', foreign_key: 'user_id'
   has_one :location
+  has_many :comments, as: :commentable
 
   validates :user_id, :event_type_id, presence: true
   validates :name, presence: true, length: { minimum: 5 }
