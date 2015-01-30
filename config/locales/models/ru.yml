@@ -20,3 +20,9 @@ ru:
         description: 'Описание'
         price: 'Цена'
         phone: 'Номер телефона'
+      event:
+        event_type_id: 'Категория'
+        name: 'Название'
+        description: 'Описание'
+        date: 'Дата'
+        phone: 'Номер телефона'
