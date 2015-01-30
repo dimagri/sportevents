@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127182922) do
+ActiveRecord::Schema.define(version: 20150130143341) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -71,6 +71,24 @@ ActiveRecord::Schema.define(version: 20150127182922) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "event_types", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "event_type_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "date"
+    t.string   "phone"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "identities", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -86,6 +104,7 @@ ActiveRecord::Schema.define(version: 20150127182922) do
     t.float    "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "event_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'home/index'
 
   resources :users, only: [ :show, :edit, :update ]
-  resources :clubs
+  resources :clubs, :events
 
   # Authorization
   get '/auth/:provider/callback' => 'sessions#create'

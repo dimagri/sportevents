@@ -13,7 +13,7 @@
 class Location < ActiveRecord::Base
 
   belongs_to :club
-
+  belongs_to :event
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
 

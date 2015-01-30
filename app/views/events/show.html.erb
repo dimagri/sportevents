@@ -3,8 +3,8 @@
   <b>Название секции:</b> <%= @event.name %><br/>
   <b>Категория:</b> <%= @event.type.name %><br/>
   <b>Описание:</b> <%= @event.description %><br/>
-  <b>Стоимость:</b> <%= @event.price %><br/>
+  <b>Дата:</b> <%= @event.date %><br/>
   <b>Контактный номер:</b> <%= @event.phone %><br/>
   <b>Добавил:</b> <u><%= link_to @event.author.name, @event.author %></u><br/>
 </div>
-<%= link_to 'Редактировать секцию', edit_club_path if current_user == @club.author || current_user.admin? %>
+<%= link_to 'Редактировать секцию', edit_event_path if current_user == @event.author || current_user.admin? %>

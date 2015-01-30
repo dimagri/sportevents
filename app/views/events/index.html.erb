@@ -1,0 +1,20 @@
+<%= render 'locations/show_map' %>
+
+<%= link_to 'Добавить событие', new_event_path if current_user %><br/>
+
+Категории:<br/>
+<% @event_types.each do |et| %>
+    <%= link_to et.name, events_path(search_by_type: et) %><br/>
+<% end %>
+<br/>
+
+<%= render 'search' %>
+
+<b><%= @message %></b><br/>
+
+<% @events.all.each do |event|%>
+    Название: <%= link_to event.name, event_path(event) %><br/>
+    Описание: <%= event.description %><br/>
+    Добавил: <%= event.author.name %><br/>
+    <hr/>
+<% end  %>

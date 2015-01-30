@@ -1,0 +1,49 @@
+<div class="form">
+  <%= form_for(@event) do |f| %>
+
+      <% if @event && @event.errors.any? %>
+          <div class="error_messages">
+            <h2>Возникли ошибки(<%= @event.errors.count %>):</h2>
+            <ul>
+              <% @event.errors.full_messages.each do |msg| %>
+                  <li>Поле <%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <%= render 'locations/add_location' %>
+
+      <div id="location">
+      </div>
+
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Категория' %><br>
+        <%= collection_radio_buttons(:event, :event_type_id, EventType.all, :id, :name) %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Описание' %><br>
+        <%= f.text_area :description %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Стоимость' %><br>
+        <%= f.text_field :date %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Контактный номер' %><br>
+        <%= f.text_field :phone %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit 'ОК'%>
+      </div>
+  <% end %>
+</div>
