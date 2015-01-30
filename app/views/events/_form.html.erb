@@ -32,9 +32,10 @@
         <%= f.text_area :description %>
       </div>
 
+      <% # TODO validate date %>
       <div class="field">
-        <%= f.label 'Стоимость' %><br>
-        <%= f.text_field :date %>
+        <%= f.label 'Начало' %><br>
+        <%= datetime_select :event, 'begins_at', default: 1.day.from_now, start_year: 2015, end_year: 2015 %>
       </div>
 
       <div class="field">
