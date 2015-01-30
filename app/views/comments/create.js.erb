@@ -1,0 +1,2 @@
+$('#no-comments').remove();
+$('#comments').prepend('<%= j render partial: 'comments/comment', locals: {comment: @comment} %>');

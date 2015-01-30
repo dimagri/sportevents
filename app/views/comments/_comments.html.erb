@@ -1,14 +1,12 @@
+<b>Комментарии</b><br/>
 <% if @comments.any? %>
-    <b>Комментарии</b><br/>
-    <hr/>
-    <% # TODO add date %>
-    <% @comments.reverse.each do |comment| %>
-        <br/>
-        <b>Добавил</b>: <%= comment.user.name %><br/>
-        <%= comment.body %><br/><hr/>
-    <% end %>
+    <div id="comments">
+      <% @comments.each do |comment| %>
+            <%= render comment %>
+        <% end %>
+    </div>
 <% else %>
-    <b>Комментариев нет</b>
+    <div id="no-comments">Комментариев нет</div>
+    <div id="comments"></div>
 <% end %>
-
 

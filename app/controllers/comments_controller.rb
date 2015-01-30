@@ -5,11 +5,13 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
-    if @comment.save
-      redirect_to @commentable, notice: 'Комментарий был добавлен'
-    else
-      redirect_to @comment
+
+    respond_to do |format|
+      if @comment.save
+        format.js {}
+      end
     end
+
   end
 
   private
