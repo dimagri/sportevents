@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :friendships
+
   # Authorization
   get '/auth/:provider/callback' => 'sessions#create'
   post '/auth/:provider/callback' => 'sessions#create'

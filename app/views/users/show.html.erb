@@ -5,5 +5,16 @@
   <b>О себе:</b> <%= @user.about %><br/>
   <b>Номер телефона:</b> <%= @user.phone %><br/>
   <b>Скайп:</b> <%= @user.skype %><br/>
+  <b>Друзья:</b>
+    <% if @user.friends.any? %>
+      <% @user.friends.each do |friend| %>
+        <%= link_to friend.name, user_path(friend) %>
+      <% end %>
+    <% else %>
+      У пользователя нет друзей
+    <% end %>
+  <br/>
+  <%= link_to 'Добавить в друзья', friendships_path(friend_id: @user.id), method: :post if user_can_add_to_friends %>
+  <%= link_to 'Удалить из друзей', friendship_path(friend_id: @user.id), method: :delete if user_can_remove_from_friends %>
 </div>
 <%= link_to 'Редактировать профиль', edit_user_path if current_user == @user %>

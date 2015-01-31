@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
 
   has_many :clubs
 
+  has_many :friendships
+  has_many :friends, through: :friendships
+
   has_many :sent_messages, class_name: "Message", foreign_key: "author_id"
   has_many :recieved_messages, class_name: "Message", foreign_key: "recipient_id"
 
