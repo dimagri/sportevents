@@ -12,6 +12,4 @@
 class Friendship < ActiveRecord::Base
   belongs_to :user
   belongs_to :friend, class_name: 'User'
-
-  scope find_by_friend_id,->(friend_id) { where(friend_id: friend_id) }
 end
