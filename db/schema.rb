@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130162105) do
+ActiveRecord::Schema.define(version: 20150131080329) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -116,6 +116,17 @@ ActiveRecord::Schema.define(version: 20150130162105) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "event_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "author_id"
+    t.integer  "recipient_id"
+    t.string   "subject"
+    t.text     "body"
+    t.boolean  "deleted_author",    default: false
+    t.boolean  "deleted_recipient", default: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "users", force: :cascade do |t|
