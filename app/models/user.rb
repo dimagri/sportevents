@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
 
   has_many :clubs
 
+  has_many :sent_messages, class_name: "Message", foreign_key: "author_id"
+  has_many :recieved_messages, class_name: "Message", foreign_key: "recipient_id"
+
   before_create :set_user_email_by_identity
 
   validates :provider, :uid, :name, presence: true

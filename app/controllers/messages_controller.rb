@@ -1,8 +1,10 @@
 class MessagesController < ApplicationController
   def inbox
+  		@messages = 
   end
 
   def sendbox
+
   end
 
   def show
