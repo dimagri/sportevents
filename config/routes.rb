@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'messages/index'
+  get 'messages/inbox'
+
+  get 'messages/sendbox'
 
   get 'messages/show'
 
