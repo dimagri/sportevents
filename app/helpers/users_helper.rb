@@ -4,8 +4,6 @@ module UsersHelper
   end
 
   def user_can_remove_from_friends
-    current_user.friends.where(id: @user.id).first
     current_user.present? && !current_user.friends.where(id: @user.id).empty?
-
   end
 end
