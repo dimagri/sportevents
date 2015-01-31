@@ -5,9 +5,9 @@ class Message < ActiveRecord::Base
 	validate :body, presence: true,
 									length: { maximum: 1000 }
 	validate :subject, 	length: { within: 4..140 },
-					presence: true
+											presence: true
 
-	scope :active_sendbox, -> {where(deleted_author: false)}
+	scope :active_sentbox, -> {where(deleted_author: false)}
 	scope :active_inbox, -> {where(deleted_recipient: false)}
 
 end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'messages/inbox'
 
-  get 'messages/sendbox'
+  get 'messages/sentbox'
 
   get 'messages/show'
 
