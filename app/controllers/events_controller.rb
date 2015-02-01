@@ -24,7 +24,7 @@ class EventsController < ApplicationController
       end
       @map_title = 'Найденные события'
     else
-      @events = Event.all
+      @events = Event.not_started
       @map_title = 'Все события'
     end
 
