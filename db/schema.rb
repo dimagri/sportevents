@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150131180845) do
+ActiveRecord::Schema.define(version: 20150201101528) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -116,14 +116,17 @@ ActiveRecord::Schema.define(version: 20150131180845) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.integer  "club_id"
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "event_id"
+    t.integer  "locationable_id"
+    t.string   "locationable_type"
   end
+
+  add_index "locations", ["locationable_type", "locationable_id"], name: "index_locations_on_locationable_type_and_locationable_id"
 
   create_table "messages", force: :cascade do |t|
     t.integer  "author_id"
