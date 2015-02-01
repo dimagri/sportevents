@@ -5,27 +5,29 @@
 
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 <script>
-    var map = L.map('map').setView([49.437820, 32.058959], 13);
-    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-        maxZoom: 18,
+    function showMap(){
+        var map = L.map('map').setView([49.437820, 32.058959], 13);
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+            maxZoom: 18,
             attribution: '<%= @map_title %>',
-        id: 'examples.map-i875mjb7'
-    }).addTo(map);
+            id: 'examples.map-i875mjb7'
+        }).addTo(map);
 
-
-    <% if params[:controller] == 'clubs'  %>
-        <% @clubs.each do |club| %>
-            L.marker(<%= [club.location.latitude, club.location.longitude] %>).addTo(map)
-                    .bindPopup("<b><a href='<%= club_path(club) %>'><%= club.name %></a></b><br/>Категория: <%= club.type.name %>");
+        <% if params[:controller] == 'clubs'  %>
+            <% @clubs.each do |club| %>
+                L.marker(<%= [club.location.latitude, club.location.longitude] %>).addTo(map)
+                        .bindPopup("<b><a href='<%= club_path(club) %>'><%= club.name %></a></b><br/>Категория: <%= club.type.name %>");
+            <% end %>
+        <% else %>
+            <% @events.each do |event| %>
+                L.marker(<%= [event.location.latitude, event.location.longitude] %>).addTo(map)
+                        .bindPopup("<b><a href='<%= event_path(event) %>'><%= event.name %></a></b><br/>Категория: <%= event.type.name %>");
+            <% end %>
         <% end %>
-    <% else %>
-        <% @events.each do |event| %>
-            L.marker(<%= [event.location.latitude, event.location.longitude] %>).addTo(map)
-                    .bindPopup("<b><a href='<%= event_path(event) %>'><%= event.name %></a></b><br/>Категория: <%= event.type.name %>");
-        <% end %>
-    <% end %>
+    }
 
-
+    $(document).ready(showMap());
+    $(document).on('page:load page:change', showMap());
 
 </script>
 

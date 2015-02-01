@@ -5,21 +5,26 @@
 
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 <script>
-    var map = L.map('map').setView([49.437820, 32.058959], 13);
+    function showLocation(){
+        var map = L.map('map').setView([49.437820, 32.058959], 13);
 
-    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: '<%= if params[:controller] == 'clubs' then @club.name else @event.name end %>',
-        id: 'examples.map-i875mjb7'
-    }).addTo(map);
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '<%= if params[:controller] == 'clubs' then @club.name else @event.name end %>',
+            id: 'examples.map-i875mjb7'
+        }).addTo(map);
 
-    <% if params[:controller] == 'clubs'  %>
-        L.marker(<%= [@club.location.latitude, @club.location.longitude] %>).addTo(map)
-                .bindPopup("<b><%= @club.name %></b><br/>Категория: <%= @club.type.name %>");
-    <% else %>
-        L.marker(<%= [@event.location.latitude, @event.location.longitude] %>).addTo(map)
-                .bindPopup("<b><%= @event.name %></b><br/>Категория: <%= @event.type.name %>");
-    <% end %>
+        <% if params[:controller] == 'clubs'  %>
+            L.marker(<%= [@club.location.latitude, @club.location.longitude] %>).addTo(map)
+                    .bindPopup("<b><%= @club.name %></b><br/>Категория: <%= @club.type.name %>");
+        <% else %>
+            L.marker(<%= [@event.location.latitude, @event.location.longitude] %>).addTo(map)
+                    .bindPopup("<b><%= @event.name %></b><br/>Категория: <%= @event.type.name %>");
+        <% end %>
+    }
+
+    $(document).ready(showLocation());
+    $(document).on('page:load page:change', showLocation());
 
 </script>
 
