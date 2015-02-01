@@ -18,13 +18,13 @@
 
 class User < ActiveRecord::Base
 
-  has_many :clubs
+  has_many :clubs, :events, dependent: :destroy
 
-  has_many :friendships
-  has_many :friends, through: :friendships
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships, dependent: :destroy
 
-  has_many :sent_messages, class_name: 'Message', foreign_key: 'author_id'
-  has_many :recieved_messages, class_name: 'Message', foreign_key: 'recipient_id'
+  has_many :sent_messages, class_name: 'Message', foreign_key: 'author_id', dependent: :destroy
+  has_many :recieved_messages, class_name: 'Message', foreign_key: 'recipient_id', dependent: :destroy
 
   before_create :set_user_email_by_identity
 
