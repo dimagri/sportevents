@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150201101528) do
+ActiveRecord::Schema.define(version: 20150201113617) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -121,7 +121,6 @@ ActiveRecord::Schema.define(version: 20150201101528) do
     t.float    "longitude"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "event_id"
     t.integer  "locationable_id"
     t.string   "locationable_type"
   end

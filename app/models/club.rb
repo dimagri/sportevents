@@ -21,7 +21,7 @@ class Club < ActiveRecord::Base
   has_one :location, as: :locationable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
 
-  validates :user_id, :club_type_id, presence: true
+  validates :user_id, :club_type_id, :location, presence: true
   validates :name, presence: true, length: { minimum: 5 }
   validates :description, presence: true, length: { minimum: 20 }
   validates :phone, presence: true

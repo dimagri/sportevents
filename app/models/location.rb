@@ -8,7 +8,6 @@
 #  longitude         :float
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  event_id          :integer
 #  locationable_id   :integer
 #  locationable_type :string
 #
@@ -20,6 +19,6 @@ class Location < ActiveRecord::Base
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
 
-  validates :latitude, :longitude, presence: true
+  validates :locationable, :latitude, :longitude, presence: true
 
 end

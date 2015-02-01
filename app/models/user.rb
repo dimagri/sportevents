@@ -18,7 +18,8 @@
 
 class User < ActiveRecord::Base
 
-  has_many :clubs, :events, dependent: :destroy
+  has_many :clubs, dependent: :destroy
+  has_many :events, dependent: :destroy
 
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, dependent: :destroy

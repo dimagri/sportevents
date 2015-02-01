@@ -20,7 +20,7 @@ class Event < ActiveRecord::Base
   has_one :location, as: :locationable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
 
-  validates :user_id, :event_type_id, presence: true
+  validates :user_id, :event_type_id, :location, presence: true
   validates :name, presence: true, length: { minimum: 5 }
   validates :description, presence: true, length: { minimum: 20 }
   validates :begins_at, presence: true, date: {
