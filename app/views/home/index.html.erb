@@ -6,6 +6,7 @@
     Привет, <b><%= current_user.name %></b>
     <%= link_to 'Профиль', user_path(current_user) %>
     <%= link_to 'Выйти', logout_path %>
+    <%= link_to 'Сообщения' %>
 <% else %>
     Войти с помощью:
     <ul>

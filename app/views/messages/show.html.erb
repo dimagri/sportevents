@@ -1,7 +1,6 @@
-<h1>Messages#show</h1>
-<h2><%= @message.subject %></h2>
+<h1>Сообщение <%= @message.subject %></h1>
 
-<p><strong>From:</strong> <%= @message.author.name %></p>
-<p><strong>Received:</strong> <%= @message.created_at.to_s(:long) %></p>
+<p><strong>От: </strong> <%= @message.author.name %></p>
+<p><strong>Отправлено:</strong> <%= @message.created_at.to_s(:long) %></p>
 
 <pre><%= @message.body %></pre>
