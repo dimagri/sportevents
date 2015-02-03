@@ -31,6 +31,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # TODO update notidications
   def confirm_email
     @confirmation = Confirmation.find_by_email(params[:email])
     @user = User.find(@confirmation.user_id)
