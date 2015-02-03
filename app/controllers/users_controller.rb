@@ -33,9 +33,10 @@ class UsersController < ApplicationController
 
   def confirm_email
     @confirmation = Confirmation.find_by_email(params[:email])
-    @user = User.where(id: @confirmation.user_id).last
+    @user = User.find(@confirmation.user_id)
       if @confirmation.code == params[:code]
         @user.update_attributes(email: @confirmation.email)
+        @confirmation.destroy
         redirect_to root_path, notice: 'Email был подтверджён.'
       else
         redirect_to root_path, notice: 'Возникла ошибка.'
