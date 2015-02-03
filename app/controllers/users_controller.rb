@@ -15,13 +15,31 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/:id
   def update
+    if params[:user][:email].present?
+      @user.confirm_email(params[:user][:email])
+      notice = 'Профиль успешно изменён. На вашу почту отправлено письмо с подтверждением.'
+    else
+      @user.update_attributes(email: '')
+      notice = 'Профиль успешно изменён.'
+    end
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'Профиль успешно изменён' }
+        format.html { redirect_to @user, notice: notice }
       else
         format.html { render :edit }
       end
     end
+  end
+
+  def confirm_email
+    @confirmation = Confirmation.find_by_email(params[:email])
+    @user = User.where(id: @confirmation.user_id).last
+      if @confirmation.code == params[:code]
+        @user.update_attributes(email: @confirmation.email)
+        redirect_to root_path, notice: 'Email был подтверджён.'
+      else
+        redirect_to root_path, notice: 'Возникла ошибка.'
+      end
   end
 
   private
@@ -35,7 +53,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :full_name, :email, :about, :phone, :skype)
+    params.require(:user).permit(:name, :full_name, :about, :phone, :skype)
   end
 
 end

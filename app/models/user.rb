@@ -21,13 +21,13 @@ class User < ActiveRecord::Base
   has_many :clubs, dependent: :destroy
   has_many :events, dependent: :destroy
 
+  has_one :confirmation
+
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, dependent: :destroy
 
   has_many :sent_messages, class_name: 'Message', foreign_key: 'author_id', dependent: :destroy
   has_many :recieved_messages, class_name: 'Message', foreign_key: 'recipient_id', dependent: :destroy
-
-  before_create :set_user_email_by_identity
 
   validates :provider, :uid, :name, presence: true
   validates :full_name, :skype, allow_blank: true, length: { in: 3..15 }
@@ -44,16 +44,13 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth['info']['name']
+      @user = user
     end
+    @user.confirm_email(auth['info']['email']) if auth['info']['email'].present?
   end
 
-  private
-
-  def set_user_email_by_identity
-    if self.provider == 'identity'
-      email = Identity.find_by_name(self.name).email
-      self.email = email
-    end
+  def confirm_email(email)
+    self.create_confirmation(email: email)
   end
 
 end

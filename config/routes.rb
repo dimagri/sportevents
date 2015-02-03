@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/index'
 
-  resources :users, only: [ :show, :edit, :update ] do
-    resources :messages    
+  resources :users do
+    resources :messages
   end
 
   resources :clubs do
@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'logout' => 'sessions#destroy'
   get '/auth/failure' => 'sessions#failure'
   resources :identities
+  get 'confirm_email' => 'users#confirm_email', as: 'confirm_email'
 
   post '/get_location' => 'locations#get_location'
 end
