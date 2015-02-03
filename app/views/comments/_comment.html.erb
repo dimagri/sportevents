@@ -1,6 +1,7 @@
 <br/>
 <div style="width: 300px;">
   <b><%= comment.user.name %></b>
+  <%= link_to 'Отправить сообщение' %>
   <span style="float: right"><%= format_date(comment.created_at) %></span>
   <br/>
   <%= comment.body %>
