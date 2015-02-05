@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'home/index'
 
   resources :users do
+    post 'send_email_confirmation' => 'users#send_email_confirmation'
     resources :messages
   end
 

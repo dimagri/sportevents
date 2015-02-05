@@ -1,7 +1,19 @@
 <div>
   <b>Логин:</b> <%= @user.name %><br/>
   <b>Полное имя:</b> <%= @user.full_name %><br/>
-  <b>Email:</b> <%= @user.email %><br/>
+  <b>Email:</b>
+  <% unless @user.email.present? %>
+    Не указан
+  <% else %>
+    <%= @user.email %>
+    <% unless @user.email_confirmed? %>
+        <span style="font-size: 12px">
+          <u>Внимание! Ваш адрес электронной почты не подтверждён.</u>
+          <%= link_to 'Отправить письмо повторно', user_send_email_confirmation_path(user_id: @user.id), method: :post %>
+        </span>
+    <% end %>
+  <% end %>
+  <br/>
   <b>О себе:</b> <%= @user.about %><br/>
   <b>Номер телефона:</b> <%= @user.phone %><br/>
   <b>Скайп:</b> <%= @user.skype %><br/>

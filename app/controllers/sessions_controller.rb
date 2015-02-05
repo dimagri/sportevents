@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     auth = request.env['omniauth.auth']
     user = User.from_omniauth(auth)
     session[:user_id] = user.id
-    notice = user.email.present? ? 'Успешный вход' : 'Успешный вход (настоятельно рекомендуем указать емейл в вашем профиле)'
+    notice = user.email_confirmed? ? 'Успешный вход' : 'Успешный вход (настоятельно рекомендуем указать емейл в вашем профиле)'
     redirect_to root_path, notice: notice
   end
 

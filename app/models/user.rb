@@ -2,18 +2,19 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  provider   :string
-#  uid        :string
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  full_name  :string
-#  email      :string
-#  about      :text
-#  phone      :string
-#  skype      :string
-#  admin      :boolean          default("f")
+#  id              :integer          not null, primary key
+#  provider        :string
+#  uid             :string
+#  name            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  full_name       :string
+#  email           :string
+#  about           :text
+#  phone           :string
+#  skype           :string
+#  admin           :boolean          default("f")
+#  email_confirmed :boolean          default("f")
 #
 
 class User < ActiveRecord::Base
@@ -44,12 +45,14 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth['info']['name']
+      user.email = auth['info']['email'] if auth['info']['email'].present?
       @user = user
     end
-    @user.confirm_email(auth['info']['email']) if auth['info']['email'].present?
+    @user.send_email_confirmation(@user.email) if @user.email.present?
+    return @user
   end
 
-  def confirm_email(email)
+  def send_email_confirmation(email)
     self.create_confirmation(email: email)
   end
 

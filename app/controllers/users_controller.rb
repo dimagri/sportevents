@@ -16,10 +16,10 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/:id
   def update
     if params[:user][:email].present?
-      @user.confirm_email(params[:user][:email])
-      notice = 'Профиль успешно изменён. На вашу почту отправлено письмо с подтверждением.'
+      @user.send_email_confirmation(params[:user][:email])
+      @user.update_attributes(email_confirmed: false)
+      notice = 'Профиль успешно изменён. Мы отправили Вам письмо с подтверждением адреса электронной почты.'
     else
-      @user.update_attributes(email: '')
       notice = 'Профиль успешно изменён.'
     end
     respond_to do |format|
@@ -31,12 +31,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def send_email_confirmation
+    @user = User.find(params[:user_id])
+    @user.send_email_confirmation(@user.email)
+    redirect_to :back, notice: 'На вашу почту отправлено письмо с подтверждением'
+  end
+
   # TODO update notidications
   def confirm_email
-    @confirmation = Confirmation.find_by_email(params[:email])
+    @confirmation = Confirmation.where(email: params[:email]).last
     @user = User.find(@confirmation.user_id)
       if @confirmation.code == params[:code]
-        @user.update_attributes(email: @confirmation.email)
+        @user.update_attributes(email: @confirmation.email, email_confirmed: true)
         @confirmation.destroy
         redirect_to root_path, notice: 'Email был подтверджён.'
       else
@@ -55,7 +61,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :full_name, :about, :phone, :skype)
+    params.require(:user).permit(:name, :full_name, :email, :about, :phone, :skype)
   end
 
 end
