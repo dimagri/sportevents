@@ -15,10 +15,10 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/:id
   def update
-    if params[:user][:email].present?
+    if params[:user][:email].present? && params[:user][:email] != @user.email
       @user.send_email_confirmation(params[:user][:email])
       @user.update_attributes(email_confirmed: false)
-      notice = 'Профиль успешно изменён. Мы отправили Вам письмо с подтверждением адреса электронной почты.'
+      notice = 'Профиль успешно изменён. На вашу почту отправлено письмо с подтверждением'
     else
       notice = 'Профиль успешно изменён.'
     end
@@ -34,19 +34,18 @@ class UsersController < ApplicationController
   def send_email_confirmation
     @user = User.find(params[:user_id])
     @user.send_email_confirmation(@user.email)
-    redirect_to :back, notice: 'На вашу почту отправлено письмо с подтверждением'
+    redirect_to @user, notice: 'На вашу почту повторно отправлено письмо с подтверждением'
   end
 
-  # TODO update notidications
   def confirm_email
     @confirmation = Confirmation.where(email: params[:email]).last
     @user = User.find(@confirmation.user_id)
       if @confirmation.code == params[:code]
         @user.update_attributes(email: @confirmation.email, email_confirmed: true)
         @confirmation.destroy
-        redirect_to root_path, notice: 'Email был подтверджён.'
+        redirect_to @user, notice: 'Адрес электронной почты был подтверджён.'
       else
-        redirect_to root_path, notice: 'Возникла ошибка.'
+        redirect_to @user, notice: 'Возникла ошибка.'
       end
   end
 
