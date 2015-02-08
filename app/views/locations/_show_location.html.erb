@@ -10,17 +10,12 @@
 
         L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
             maxZoom: 18,
-            attribution: '<%= if params[:controller] == 'clubs' then @club.name else @event.name end %>',
+            attribution: '<%= @locationable.name %>',
             id: 'examples.map-i875mjb7'
         }).addTo(map);
 
-        <% if params[:controller] == 'clubs'  %>
-            L.marker(<%= [@club.location.latitude, @club.location.longitude] %>).addTo(map)
-                    .bindPopup("<b><%= @club.name %></b><br/>Категория: <%= @club.type.name %>");
-        <% else %>
-            L.marker(<%= [@event.location.latitude, @event.location.longitude] %>).addTo(map)
-                    .bindPopup("<b><%= @event.name %></b><br/>Категория: <%= @event.type.name %>");
-        <% end %>
+        L.marker(<%= [@locationable.location.latitude, @locationable.location.longitude] %>).addTo(map)
+                .bindPopup("<b><%= @locationable.name %></b><br/>Категория: <%= @locationable.type.name %>")
     }
 
     $(document).ready(showLocation());

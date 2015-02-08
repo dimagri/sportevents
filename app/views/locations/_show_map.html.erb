@@ -13,16 +13,9 @@
             id: 'examples.map-i875mjb7'
         }).addTo(map);
 
-        <% if params[:controller] == 'clubs'  %>
-            <% @clubs.each do |club| %>
-                L.marker(<%= [club.location.latitude, club.location.longitude] %>).addTo(map)
-                        .bindPopup("<b><a href='<%= club_path(club) %>'><%= club.name %></a></b><br/>Категория: <%= club.type.name %>");
-            <% end %>
-        <% else %>
-            <% @events.each do |event| %>
-                L.marker(<%= [event.location.latitude, event.location.longitude] %>).addTo(map)
-                        .bindPopup("<b><a href='<%= event_path(event) %>'><%= event.name %></a></b><br/>Категория: <%= event.type.name %>");
-            <% end %>
+        <% @locationables.each do |locationable| %>
+        L.marker(<%= [locationable.location.latitude, locationable.location.longitude] %>).addTo(map)
+                .bindPopup("<b><a href='<%= if params[:controller] == 'clubs' then club_path(locationable) else event_path(locationable) end %>'><%= locationable.name %></a></b><br/>Категория: <%= locationable.type.name %>");
         <% end %>
     }
 

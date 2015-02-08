@@ -11,21 +11,28 @@
         id: 'examples.map-i875mjb7'
     }).addTo(map);
 
-    var marker, location;
+    var marker;
+    <% if @locationable.present? %>
+        marker = addMarker(<%= @locationable.location.latitude %>, <%= @locationable.location.longitude %>);
+    <% end %>
+
     function onMapClick(e) {
         if (marker != null) {
             map.removeLayer(marker);
         }
-        marker = new L.Marker(e.latlng, { draggable:true });
-        map.addLayer(marker);
-        location.lat = e.latlng.lat;
-        location.lng = e.latlng.lng;
-        $.ajax({
-            url: "/get_location",
-            type: "post",
-            data : 'latitude=' + location.lat + '&longitude=' + location.lng
-        });
+        marker = addMarker(e.latlng.lat, e.latlng.lng);
     }
 
     map.on('click', onMapClick);
+
+    function addMarker(lat, lng) {
+        var new_marker = new L.Marker([lat, lng], { draggable:true });
+        map.addLayer(new_marker);
+        $.ajax({
+            url: "/get_location",
+            type: "post",
+            data : 'latitude=' + lat + '&longitude=' + lng
+        });
+        return new_marker;
+    }
 </script>

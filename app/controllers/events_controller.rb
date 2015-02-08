@@ -15,6 +15,7 @@ class EventsController < ApplicationController
       s_hash = Event.search_not_started
     end
     @events, @message, @map_title = s_hash[:events], s_hash[:message], s_hash[:map_title]
+    @locationables = @events
     @event_types = EventType.all
   end
 
@@ -34,12 +35,14 @@ class EventsController < ApplicationController
   end
 
   def show
+    @locationable = @event
     @commentable = @event
     @comments = @commentable.comments.ordered
     @comment = Comment.new
   end
 
   def edit
+    @locationable = @event
   end
 
   def update

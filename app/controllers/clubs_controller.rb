@@ -15,6 +15,7 @@ class ClubsController < ApplicationController
       s_hash = Club.search_confirmed
     end
     @clubs, @message, @map_title = s_hash[:clubs], s_hash[:message], s_hash[:map_title]
+    @locationables = @clubs
     @club_types = ClubType.all
   end
 
@@ -34,12 +35,14 @@ class ClubsController < ApplicationController
   end
 
   def show
+    @locationable = @club
     @commentable = @club
     @comments = @commentable.comments.ordered
     @comment = Comment.new
   end
 
   def edit
+    @locationable = @club
   end
 
   def update
