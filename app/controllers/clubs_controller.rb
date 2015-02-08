@@ -1,7 +1,8 @@
 class ClubsController < ApplicationController
 
+  include Locationable
+
   before_action :set_club, only: [ :show, :edit, :update ]
-  before_action :create_club_location, only: [ :create, :update ]
   before_action :check_current_user, only: :new
   before_action :check_club_author, only: :edit
 
@@ -61,15 +62,6 @@ class ClubsController < ApplicationController
     c_params = params.require(:club).permit(:name, :club_type_id, :description, :price, :phone)
     c_params[:location] = @location
     c_params
-  end
-
-  def create_club_location
-    if params[:location].nil?
-      redirect_to :back, alert: 'Поставьте метку на карте'
-      return
-    end
-    loc_params = params[:location].split(' ')
-    @location = Location.create(latitude: loc_params[0], longitude: loc_params[1])
   end
 
   def check_current_user

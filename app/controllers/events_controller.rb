@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
 
+  include Locationable
+
   before_action :set_event, only: [ :show, :edit, :update ]
-  before_action :create_event_location, only: [ :create, :update ]
   before_action :check_current_user, only: :new
   before_action :check_event_author, only: :edit
 
@@ -61,15 +62,6 @@ class EventsController < ApplicationController
     e_params = params.require(:event).permit(:name, :event_type_id, :description, :begins_at, :phone)
     e_params[:location] = @location
     e_params
-  end
-
-  def create_event_location
-    if params[:location].nil?
-      redirect_to new_event_path, alert: 'Поставьте метку на карте'
-      return
-    end
-    loc_params = params[:location].split(' ')
-    @location = Location.create(latitude: loc_params[0], longitude: loc_params[1])
   end
 
   def check_current_user
