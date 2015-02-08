@@ -23,16 +23,47 @@ class Event < ActiveRecord::Base
   validates :user_id, :event_type_id, :location, presence: true
   validates :name, presence: true, length: { minimum: 5 }
   validates :description, presence: true, length: { minimum: 20 }
+  validates :phone, presence: true
   validates :begins_at, presence: true, date: {
                           after: Proc.new { Time.now },
                           before: Proc.new { Time.now + 1.year },
                           message: 'содержит неверное значение'
                       }
-  validates :phone, presence: true
 
-
-  scope :search_by_type, ->(type) { where(type: type) }
-  scope :search_by_name, ->(name) { where('name LIKE ?', "%#{name}%") }
   scope :not_started, ->{ where('begins_at > ?', Time.now.to_datetime) }
   scope :finished, ->{ where('begins_at < ?', Time.now.to_datetime) }
+
+  def self.add(event_params, current_user, location)
+    Event.new(event_params) do |c|
+      c.author = current_user
+      c.location = location
+    end
+  end
+
+  def self.search_by_type(type)
+    events = Event.where(type: type)
+    category = EventType.find(type)
+    if events.any?
+      message = "Результаты поиска событий по категории \"#{category.name}\""
+    else
+      message = 'Пока нет секций в этой категории'
+    end
+    map_title = "События с категорией \"#{category.name}\""
+    { events: events, message: message, map_title: map_title }
+  end
+
+  def self.search_by_name(name)
+    events = Event.where('name LIKE ?', "%#{name}%")
+    if events.any?
+      message = "Результаты поиска событий по запросу \"#{name}\""
+    else
+      message = 'Нет таких событий'
+    end
+    map_title = 'Найденные события'
+    { events: events, message: message, map_title: map_title }
+  end
+
+  def self.search_not_started
+    { events: Event.not_started, message: 'Все события', map_title: 'Все события' }
+  end
 end

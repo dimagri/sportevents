@@ -7,27 +7,13 @@ class EventsController < ApplicationController
 
   def index
     if params[:search_by_type].present?
-      @events= Event.search_by_type(params[:search_by_type])
-      if @events.any?
-        @message = "Результаты поиска событий по категории \"#{@events.first.type.name}\""
-        @map_title = "События с категорией \"#{@clubs.first.type.name}\""
-      else
-        @message = 'Пока нет секций в этой категории'
-        @map_title = ''
-      end
+      s_hash = Event.search_by_type(params[:search_by_type])
     elsif params[:search_by_name].present?
-      @events = Event.search_by_name(params[:search_by_name])
-      if @events.any?
-        @message = "Результаты поиска событий по запросу \"#{params[:search_by_name]}\""
-      else
-        @message = 'Нет таких событий'
-      end
-      @map_title = 'Найденные события'
+      s_hash = Event.search_by_name(params[:search_by_name])
     else
-      @events = Event.not_started
-      @map_title = 'Все события'
+      s_hash = Event.search_not_started
     end
-
+    @events, @message, @map_title = s_hash[:events], s_hash[:message], s_hash[:map_title]
     @event_types = EventType.all
   end
 
@@ -36,9 +22,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
-    @event.author = current_user
-    @event.location = @location
+    @event = Event.add(event_params, current_user, @location)
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Событие добавлено' }
@@ -59,7 +43,7 @@ class EventsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @event.update_attributes(event_params) && @event.update_attributes(location: @location)
+      if @event.update_attributes(event_params)
         format.html { redirect_to @event, notice: 'Событие было изменено' }
       else
         format.html { render :edit }
@@ -74,7 +58,9 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :event_type_id, :description, :begins_at, :phone)
+    e_params = params.require(:event).permit(:name, :event_type_id, :description, :begins_at, :phone)
+    e_params[:location] = @location
+    e_params
   end
 
   def create_event_location
