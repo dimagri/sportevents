@@ -15,22 +15,16 @@
 
 class Event < ActiveRecord::Base
 
-  include EventSearch
+  include SportObject, EventSearch
 
   belongs_to :type, class_name: 'EventType', foreign_key: 'event_type_id'
-  belongs_to :author, class_name: 'User', foreign_key: 'user_id'
-  has_one :location, as: :locationable, dependent: :destroy
-  has_many :comments, as: :commentable, dependent: :destroy
 
-  validates :user_id, :event_type_id, :location, presence: true
-  validates :name, presence: true, length: { minimum: 5 }
-  validates :description, presence: true, length: { minimum: 20 }
-  validates :phone, presence: true
+  validates :event_type_id, presence: true
   validates :begins_at, presence: true, date: {
                           after: Proc.new { Time.now },
                           before: Proc.new { Time.now + 1.year },
                           message: 'содержит неверное значение'
-                      }
+                        }
 
   scope :not_started, ->{ where('begins_at > ?', Time.now.to_datetime) }
   scope :finished, ->{ where('begins_at < ?', Time.now.to_datetime) }
