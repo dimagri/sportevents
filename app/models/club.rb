@@ -16,6 +16,8 @@
 
 class Club < ActiveRecord::Base
 
+  include ClubSearch
+
   belongs_to :type, class_name: 'ClubType', foreign_key: 'club_type_id'
   belongs_to :author, class_name: 'User', foreign_key: 'user_id'
   has_one :location, as: :locationable, dependent: :destroy
@@ -36,31 +38,31 @@ class Club < ActiveRecord::Base
     end
   end
 
-  def self.search_by_type(type)
-    clubs = Club.where(type: type).confirmed
-    category = ClubType.find(type)
-    if clubs.any?
-      message = "Результаты поиска секций по категории \"#{category.name}\""
-    else
-      message = 'Пока нет секций в этой категории'
-    end
-    map_title = "Секции с категорией \"#{category.name}\""
-    { clubs: clubs, message: message, map_title: map_title }
-  end
-
-  def self.search_by_name(name)
-    clubs = Club.where('name LIKE ?', "%#{name}%")
-    if clubs.any?
-      message = "Результаты поиска секций по названию \"#{name}\""
-    else
-      message = 'Нет таких секций'
-    end
-    map_title = 'Найденные секции'
-    { clubs: clubs, message: message, map_title: map_title }
-  end
-
-  def self.search_confirmed
-    { clubs: Club.confirmed, message: 'Все секции', map_title: 'Все секции' }
-  end
+  # def self.search_by_type(type)
+  #   clubs = Club.where(type: type).confirmed
+  #   category = ClubType.find(type)
+  #   if clubs.any?
+  #     message = "Результаты поиска секций по категории \"#{category.name}\""
+  #   else
+  #     message = 'Пока нет секций в этой категории'
+  #   end
+  #   map_title = "Секции с категорией \"#{category.name}\""
+  #   { clubs: clubs, message: message, map_title: map_title }
+  # end
+  #
+  # def self.search_by_name(name)
+  #   clubs = Club.where('name LIKE ?', "%#{name}%")
+  #   if clubs.any?
+  #     message = "Результаты поиска секций по названию \"#{name}\""
+  #   else
+  #     message = 'Нет таких секций'
+  #   end
+  #   map_title = 'Найденные секции'
+  #   { clubs: clubs, message: message, map_title: map_title }
+  # end
+  #
+  # def self.search_confirmed
+  #   { clubs: Club.confirmed, message: 'Все секции', map_title: 'Все секции' }
+  # end
 
 end
