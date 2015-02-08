@@ -50,7 +50,7 @@ class EventsController < ApplicationController
 
   def show
     @commentable = @event
-    @comments = @commentable.comments
+    @comments = @commentable.comments.ordered
     @comment = Comment.new
   end
 

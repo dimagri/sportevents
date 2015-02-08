@@ -49,7 +49,7 @@ class ClubsController < ApplicationController
 
   def show
     @commentable = @club
-    @comments = @commentable.comments
+    @comments = @commentable.comments.ordered
     @comment = Comment.new
   end
 

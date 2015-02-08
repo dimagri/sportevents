@@ -17,5 +17,5 @@ class Comment < ActiveRecord::Base
 
   validates :user_id, :commentable, :body, presence: true
 
-  default_scope { order('created_at DESC') }
+  scope :ordered, ->{ order('created_at DESC') }
 end

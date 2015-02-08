@@ -20,7 +20,7 @@ class Message < ActiveRecord::Base
 	validates :body, presence: true, length: { maximum: 1000 }
 	validates :subject, length: { within: 4..140 }, presence: true
 
-	scope :active_sentbox, -> {where(deleted_author: false)}
-	scope :active_inbox, -> {where(deleted_recipient: false)}
+	scope :active_sentbox, ->{where(deleted_author: false)}
+	scope :active_inbox, ->{where(deleted_recipient: false)}
 
 end

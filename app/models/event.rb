@@ -33,6 +33,6 @@ class Event < ActiveRecord::Base
 
   scope :search_by_type, ->(type) { where(type: type) }
   scope :search_by_name, ->(name) { where('name LIKE ?', "%#{name}%") }
-  scope :not_started, -> { where('begins_at > ?', Time.now.to_datetime) }
-  scope :finished, -> { where('begins_at < ?', Time.now.to_datetime) }
+  scope :not_started, ->{ where('begins_at > ?', Time.now.to_datetime) }
+  scope :finished, ->{ where('begins_at < ?', Time.now.to_datetime) }
 end
