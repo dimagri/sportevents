@@ -7,26 +7,13 @@ class ClubsController < ApplicationController
 
   def index
     if params[:search_by_type].present?
-      @clubs = Club.search_by_type(params[:search_by_type])
-      if @clubs.any?
-        @message = "Результаты поиска секций по категории \"#{@clubs.first.type.name}\""
-      else
-        @message = 'Пока нет секций в этой категории'
-      end
-      @map_title = "Секции с категорией \"#{@clubs.first.type.name}\""
+      s_hash = Club.search_by_type(params[:search_by_type])
     elsif params[:search_by_name].present?
-      @clubs = Club.search_by_name(params[:search_by_name])
-      if @clubs.any?
-        @message = "Результаты поиска секций по запросу \"#{params[:search_by_name]}\""
-      else
-        @message = 'Нет таких секций'
-      end
-      @map_title = 'Найденные секции'
+      s_hash = Club.search_by_name(params[:search_by_name])
     else
-      @clubs = Club.confirmed
-      @map_title = 'Все секции'
+      s_hash = Club.search_confirmed
     end
-
+    @clubs, @message, @map_title = s_hash[:clubs], s_hash[:message], s_hash[:map_title]
     @club_types = ClubType.all
   end
 
@@ -35,9 +22,7 @@ class ClubsController < ApplicationController
   end
 
   def create
-    @club = Club.new(club_params)
-    @club.author = current_user
-    @club.location = @location
+    @club = Club.add(club_params, current_user, @location)
     respond_to do |format|
       if @club.save
         format.html { redirect_to @club, notice: 'Секция будет добавлена после прохождения модерации' }
@@ -58,7 +43,7 @@ class ClubsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @club.update_attributes(club_params) && @club.update_attributes(location: @location)
+      if @club.update_attributes(club_params)
         format.html { redirect_to @club, notice: 'Секция была изменена' }
       else
         format.html { render :edit }
@@ -73,7 +58,9 @@ class ClubsController < ApplicationController
   end
 
   def club_params
-    params.require(:club).permit(:name, :club_type_id, :description, :price, :phone)
+    c_params = params.require(:club).permit(:name, :club_type_id, :description, :price, :phone)
+    c_params[:location] = @location
+    c_params
   end
 
   def create_club_location

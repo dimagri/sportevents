@@ -26,8 +26,41 @@ class Club < ActiveRecord::Base
   validates :description, presence: true, length: { minimum: 20 }
   validates :phone, presence: true
 
-  scope :search_by_type, ->(type) { where(type: type) }
-  scope :search_by_name, ->(name) { where('name LIKE ?', "%#{name}%") }
   scope :confirmed, ->{ where(confirmed: true) }
   scope :unconfirmed, ->{ where(confirmed: false) }
+
+  def self.add(club_params, current_user, location)
+    Club.new(club_params) do |c|
+      c.author = current_user
+      c.location = location
+    end
+  end
+
+  def self.search_by_type(type)
+    clubs = Club.where(type: type).confirmed
+    category = ClubType.find(type)
+    if clubs.any?
+      message = "Результаты поиска секций по категории \"#{category.name}\""
+    else
+      message = 'Пока нет секций в этой категории'
+    end
+    map_title = "Секции с категорией \"#{category.name}\""
+    { clubs: clubs, message: message, map_title: map_title }
+  end
+
+  def self.search_by_name(name)
+    clubs = Club.where('name LIKE ?', "%#{name}%")
+    if clubs.any?
+      message = "Результаты поиска секций по названию \"#{name}\""
+    else
+      message = 'Нет таких секций'
+    end
+    map_title = 'Найденные секции'
+    { clubs: clubs, message: message, map_title: map_title }
+  end
+
+  def self.search_confirmed
+    { clubs: Club.confirmed, message: 'Все секции', map_title: 'Все секции' }
+  end
+
 end
