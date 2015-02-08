@@ -12,9 +12,12 @@
 
 class Identity < OmniAuth::Identity::Models::ActiveRecord
 
-  validates :name, :email, :password_digest, presence: true
-  validates :name, length: { minimum: 3 }
-  validates :email, uniqueness: true , format: { with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/ }
-  validates :password_digest, length: { minimum: 6 }
+  validates :name, presence: true, length: { minimum: 3 }
+  validates :email, presence: true,
+                    uniqueness: true,
+                    format: {
+                      with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/
+                    }
+  validates :password_digest, presence: true, length: { minimum: 6 }
 
 end
