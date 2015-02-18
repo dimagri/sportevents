@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   def update
     if params[:user][:email].present? && params[:user][:email] != @user.email
       @user.send_email_confirmation(params[:user][:email])
-      @user.update_attributes(email_confirmed: false)
       notice = 'Профиль успешно изменён. На вашу почту отправлено письмо с подтверждением'
     else
       notice = 'Профиль успешно изменён.'
@@ -34,7 +33,7 @@ class UsersController < ApplicationController
   def send_email_confirmation
     @user = User.find(params[:user_id])
     @user.send_email_confirmation(@user.email)
-    redirect_to @user, notice: 'На вашу почту повторно отправлено письмо с подтверждением'
+    redirect_to @uer, notice: 'На вашу почту повторно отправлено письмо с подтверждением'
   end
 
   def confirm_email

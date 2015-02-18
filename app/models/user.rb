@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
 
   def send_email_confirmation(email)
     self.create_confirmation(email: email)
+    self.update_attributes(email_confirmed: false)
   end
 
 end

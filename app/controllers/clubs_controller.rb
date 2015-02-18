@@ -8,13 +8,13 @@ class ClubsController < ApplicationController
 
   def index
     if params[:search_by_type].present?
-      s_hash = Club.search_by_type(params[:search_by_type])
+      search_hash = Club.search_by_type(params[:search_by_type])
     elsif params[:search_by_name].present?
-      s_hash = Club.search_by_name(params[:search_by_name])
+      search_hash = Club.search_by_name(params[:search_by_name])
     else
-      s_hash = Club.search_confirmed
+      search_hash = Club.search_confirmed
     end
-    @clubs, @message, @map_title = s_hash[:clubs], s_hash[:message], s_hash[:map_title]
+    @clubs, @message, @map_title = search_hash[:clubs], search_hash[:message], search_hash[:map_title]
     @locationables = @clubs
     @club_types = ClubType.all
   end
