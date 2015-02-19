@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   has_many :sent_messages, class_name: 'Message', foreign_key: 'author_id', dependent: :destroy
   has_many :recieved_messages, class_name: 'Message', foreign_key: 'recipient_id', dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness:true
   validates :full_name, :skype, allow_blank: true, length: { in: 3..15 }
   validates :email, uniqueness: true, allow_blank: true, format: { with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/ }
   validates :about, allow_blank: true, length: { in: 0..100 }
