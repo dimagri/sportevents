@@ -25,6 +25,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'geocoder'
 
+gem 'unread'
+
 # gem 'russian'
 
 # Use jquery as the JavaScript library

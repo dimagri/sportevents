@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
 
   include OmniauthRegistration
 
+  acts_as_reader
+
   has_many :clubs, dependent: :destroy
   has_many :events, dependent: :destroy
 
