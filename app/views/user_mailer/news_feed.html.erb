@@ -1,3 +1,6 @@
+<h2>Добрый день!</h2>
+<b>Ваши друзья добавили несколько событий, возможно вам это будет интересно.</b>
+
 <% @unread_events.each do |event| %>
-	<%= event.name %><br/>
+	<%= link_to event.name, event_path %>. Добавил <%= event.author.name %><br/><br/>
 <% end %>
