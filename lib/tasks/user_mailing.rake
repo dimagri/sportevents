@@ -1,4 +1,4 @@
-namespace :mailing do
+namespace :user_mailing do
 	task :send_news_feed => :environment do
 		User.all.each do |user|
 			if user.email.present?

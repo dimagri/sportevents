@@ -5,18 +5,15 @@
 
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 <script>
-    function showLocation(){
-        var map = L.map('map').setView([49.437820, 32.058959], 13);
+    var name = '<%= @locationable.name %>';
+    var latlng = <%= [@locationable.location.latitude, @locationable.location.longitude] %>;
+    var type = '<%= @locationable.type.name %>';
 
-        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-            attribution: '<%= @locationable.name %>',
-            id: 'examples.map-i875mjb7'
-        }).addTo(map);
-
-        L.marker(<%= [@locationable.location.latitude, @locationable.location.longitude] %>).addTo(map)
-                .bindPopup("<b><%= @locationable.name %></b><br/>Категория: <%= @locationable.type.name %>")
-    }
+    // var locationable = {
+        // name: '<%= @locationable.name %>',
+        // location: [@locationable.location.latitude, @locationable.location.longitude],
+        // type: '<%= @locationable.type.name %>'
+    // }
 
     $(document).ready(showLocation());
     $(document).on('page:load page:change', showLocation());
