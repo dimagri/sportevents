@@ -29,7 +29,7 @@ class Event < ActiveRecord::Base
                         }
 
   scope :not_started, ->{ where('begins_at > ?', Time.now.to_datetime) }
-  scope :finished, ->{ where('begins_at < ?', Time.now.to_datetime) }
+  scope :started, ->{ where('begins_at < ?', Time.now.to_datetime) }
 
   def self.add(event_params, current_user, location)
     Event.new(event_params) do |c|

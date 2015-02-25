@@ -4,7 +4,7 @@ require "rails_helper"
 describe Club do
   
   before(:each) do
-    @club = Club.new(
+    @club = Club.create(
       author: User.new,
       name: "Some club",
       description: "DESC" * 10,
@@ -35,5 +35,15 @@ describe Club do
   it "is invalid without correct description length" do
     @club.description = "D"
     expect(@club).to have(1).errors_on(:description)
+  end
+
+  it "returns a array of confirmed clubs" do
+    @club.update_attributes(confirmed: true)
+    expect(Club.confirmed).to eq [@club]
+  end
+
+  it "returns a array of unconfirmed clubs" do
+    @club.update_attributes(confirmed: false)
+    expect(Club.unconfirmed).to eq [@club]
   end
 end

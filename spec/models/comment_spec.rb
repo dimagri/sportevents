@@ -3,7 +3,7 @@ require "rails_helper"
 
 describe Comment do
   before(:each) do
-    @comment = Comment.new(
+    @comment = Comment.create(
       user_id: 1,
       commentable: Club.new,
       body: "Comment text")
@@ -38,6 +38,12 @@ describe Comment do
     expect(@comment).to be_valid
   end
 
-  it "should sort comments in right order"
+  it "returns a sorted array of comments" do
+    @comment2 = Comment.create(
+      user_id: 1,
+      commentable: Club.new,
+      body: "Comment text2")
+    expect(Comment.ordered).to eq [@comment2, @comment]
+  end
 
 end

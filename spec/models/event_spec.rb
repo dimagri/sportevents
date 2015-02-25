@@ -42,4 +42,9 @@ describe Event do
     @event.begins_at = 1.day.ago
     expect(@event).to have(1).errors_on(:begins_at)
   end
+
+  it "returns a array of not started events" do
+    @event.update_attributes(begins_at: 1.day.from_now)
+    expect(Event.not_started).to eq [@event]
+  end
 end
