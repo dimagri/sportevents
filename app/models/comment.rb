@@ -17,6 +17,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   validates :user_id, :commentable, :body, presence: true
+  validates :body, length: { in: 3..150 }
 
   scope :ordered, ->{ order('created_at DESC') }
 end

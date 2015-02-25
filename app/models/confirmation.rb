@@ -17,6 +17,8 @@ class Confirmation < ActiveRecord::Base
   before_create :generate_code
   after_create :send_email
 
+  validates :user, presence: true
+
   private
 
   def generate_code
