@@ -55,6 +55,9 @@ gem 'inherited_resources', github: 'josevalim/inherited_resources'
 gem 'devise'
 
 group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-collection_matchers'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
