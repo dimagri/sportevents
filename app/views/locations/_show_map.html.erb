@@ -5,7 +5,8 @@
 
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 <script>
-    var markersArray = []
+    var mapTitle = '<%= @map_title %>';
+    var markersArray = [];
 
     <% @locationables.each do |locationable| %>
         var marker = {
