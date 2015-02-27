@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
 
-
   def inbox
   	@messages = current_user.recieved_messages 
   end
@@ -10,15 +9,16 @@ class MessagesController < ApplicationController
   end
 
   def show
-  	@message = current_user.messages.find(params[:id])
+  	@message = Message.find(params[:id])
   end
 
   def new
-  	@message = @user.messages.build
+    @recipient = User.find(params[:recipient_id])
+  	@message = current_user.sent_messages.build
   end
 
   def create
-    @message = current_user.messages.build(message_params)
+    @message = current_user.sent_messages.build(message_params)
     if @message.save
       flash[:notice] = "Ваше сообщение отправлено"
       redirect_to :back
@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:subject, :body, :author_id, :recipient_id)
+    params.require(:message).permit(:subject, :body, :recipient_id)
   end
 
 end

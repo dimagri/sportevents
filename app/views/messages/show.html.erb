@@ -1,6 +1,6 @@
 <h1>Сообщение <%= @message.subject %></h1>
 
 <p><strong>От: </strong> <%= @message.author.name %></p>
-<p><strong>Отправлено:</strong> <%= @message.created_at.to_s(:long) %></p>
+<p><strong>Кому: </strong> <%= @message.recipient.name %></p>
 
 <pre><%= @message.body %></pre>

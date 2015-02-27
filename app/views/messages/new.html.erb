@@ -1,11 +1,9 @@
-<h1>Новое сообщения</h1>
-<% form_for :message, :url => {:controller => "messages", :action => "create"} do |f| %>
+<h1>Новое сообщение</h1>
+<%= form_for @message do |f| %>
 
   <p>
-    To:<br />
-    <select name="message[to][]">
-      <%= options_from_collection_for_select(User.find(:all), :id, :login, @message.to) %>
-    </select>
+    Кому: <%= @recipient.name %>
+    <%= f.hidden_field :recipient_id, value: @recipient.id %>
   </p>
 
   <p>Тема: <%= f.text_field :subject %></p>

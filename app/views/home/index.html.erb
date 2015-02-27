@@ -5,7 +5,8 @@
 <% if current_user %>
     Привет, <b><%= current_user.name %></b>
     <%= link_to 'Профиль', user_path(current_user) %>
-    <%= link_to 'Сообщения' %>
+    <%= link_to 'Входящие сообщения', inbox_path %>
+    <%= link_to 'Отправленные сообщения', sentbox_path %>
     <%= link_to 'Выйти', logout_path %>
 <% else %>
     Войти с помощью:

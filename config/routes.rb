@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 
   resources :users do
     post 'send_email_confirmation' => 'users#send_email_confirmation'
-    resources :messages
   end
 
   resources :clubs do
@@ -22,6 +21,11 @@ Rails.application.routes.draw do
 
   resources :friendships
 
+  # Messages
+  resources :messages, only: [:new, :create, :show]
+  get 'inbox' => 'messages#inbox'
+  get 'sentbox' => 'messages#sentbox'
+
   # Authorization
   get '/auth/:provider/callback' => 'sessions#create'
   post '/auth/:provider/callback' => 'sessions#create'
@@ -30,5 +34,8 @@ Rails.application.routes.draw do
   resources :identities
   get 'confirm_email' => 'users#confirm_email', as: 'confirm_email'
 
+  # Locations
   post '/get_location' => 'locations#get_location'
+
+
 end
