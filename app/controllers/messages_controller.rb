@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
     @message = current_user.sent_messages.build(message_params)
     if @message.save
       flash[:notice] = "Ваше сообщение отправлено"
-      redirect_to :back
+      redirect_to root_path
     else
       render :new
     end
