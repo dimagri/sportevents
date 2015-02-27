@@ -2,12 +2,14 @@
 
 <table>
   <tr>
+    <th></th>
     <th>От</th>
     <th>Тема</th>
   </tr>
   
   <% for message in @messages %>
     <tr>
+      <td><%= '---UNREAD---' if message.unread %></td>
       <td><%= message.author.name %></td>
       <td><%= link_to message.subject, message_path(message) %></td>
     </tr>

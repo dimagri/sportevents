@@ -23,4 +23,8 @@ class Message < ActiveRecord::Base
 	scope :active_sentbox, ->{where(deleted_author: false)}
 	scope :active_inbox, ->{where(deleted_recipient: false)}
 
+  def mark_as_read_by(user)
+    update_attributes(unread: false) if (user.id == self.recipient_id)
+  end
+
 end
