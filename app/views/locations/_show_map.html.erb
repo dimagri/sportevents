@@ -5,19 +5,15 @@
 
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 <script>
-    function showMap(){
-        var map = L.map('map').setView([49.437820, 32.058959], 13);
-        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-            attribution: '<%= @map_title %>',
-            id: 'examples.map-i875mjb7'
-        }).addTo(map);
+    var markersArray = []
 
-        <% @locationables.each do |locationable| %>
-        L.marker(<%= [locationable.location.latitude, locationable.location.longitude] %>).addTo(map)
-                .bindPopup("<b><a href='<%= if params[:controller] == 'clubs' then club_path(locationable) else event_path(locationable) end %>'><%= locationable.name %></a></b><br/>Категория: <%= locationable.type.name %>");
-        <% end %>
-    }
+    <% @locationables.each do |locationable| %>
+        var marker = {
+            latlng: <%= [locationable.location.latitude, locationable.location.longitude] %>,
+            popup: "<b><a href='<%= if params[:controller] == 'clubs' then club_path(locationable) else event_path(locationable) end %>'><%= locationable.name %></a></b><br/>Категория: <%= locationable.type.name %>"
+            }
+        markersArray.push(marker);
+    <% end %>
 
     $(document).ready(showMap());
     $(document).on('page ready page:ready page:load page:update page:change', showMap());
