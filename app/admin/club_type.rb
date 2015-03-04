@@ -2,6 +2,14 @@ ActiveAdmin.register ClubType do
 
   config.filters = false
 
+  permit_params ClubType.column_names
+
+  index do
+    id_column
+    column :name
+    actions defaults: true
+  end
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
