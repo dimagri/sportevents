@@ -1,4 +1,4 @@
-ActiveAdmin.register Club do
+ActiveAdmin.register EventType do
 
   config.filters = false
 
