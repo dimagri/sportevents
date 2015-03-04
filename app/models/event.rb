@@ -37,4 +37,8 @@ class Event < ActiveRecord::Base
       c.location = location
     end
   end
+
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
 end

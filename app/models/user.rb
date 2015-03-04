@@ -43,4 +43,8 @@ class User < ActiveRecord::Base
     self.update_attributes(email_confirmed: false)
   end
 
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+
 end

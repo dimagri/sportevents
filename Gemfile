@@ -27,7 +27,7 @@ gem 'geocoder'
 
 gem 'unread'
 
-# gem 'russian'
+gem 'russian'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
