@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227094617) do
+ActiveRecord::Schema.define(version: 20150304105943) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 20150227094617) do
     t.string   "skype"
     t.boolean  "admin",           default: false
     t.boolean  "email_confirmed", default: false
+    t.string   "avatar_url"
   end
 
 end

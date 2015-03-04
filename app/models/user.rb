@@ -15,6 +15,7 @@
 #  skype           :string
 #  admin           :boolean          default("f")
 #  email_confirmed :boolean          default("f")
+#  avatar_url      :string
 #
 
 class User < ActiveRecord::Base

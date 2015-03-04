@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: clubs
+#
+#  id           :integer          not null, primary key
+#  club_type_id :integer
+#  user_id      :integer
+#  name         :string
+#  description  :text
+#  price        :integer
+#  phone        :string
+#  confirmed    :boolean
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 require "spec_helper"
 require "rails_helper"
 

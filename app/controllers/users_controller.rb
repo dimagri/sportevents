@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def send_email_confirmation
     @user = User.find(params[:user_id])
     @user.send_email_confirmation(@user.email)
-    redirect_to @uer, notice: 'На вашу почту повторно отправлено письмо с подтверждением'
+    redirect_to @user, notice: 'На вашу почту повторно отправлено письмо с подтверждением'
   end
 
   def confirm_email
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :full_name, :email, :about, :phone, :skype)
+    params.require(:user).permit(:name, :full_name, :email, :about, :phone, :skype, :avatar_url)
   end
 
 end

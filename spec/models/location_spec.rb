@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: locations
+#
+#  id                :integer          not null, primary key
+#  address           :string
+#  latitude          :float
+#  longitude         :float
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  locationable_id   :integer
+#  locationable_type :string
+#
+
 require "spec_helper"
 require "rails_helper"
 

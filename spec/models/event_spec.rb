@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id            :integer          not null, primary key
+#  event_type_id :integer
+#  user_id       :integer
+#  name          :string
+#  description   :text
+#  phone         :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  begins_at     :datetime
+#
+
 require "spec_helper"
 require "rails_helper"
 

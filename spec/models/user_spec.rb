@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  provider        :string
+#  uid             :string
+#  name            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  full_name       :string
+#  email           :string
+#  about           :text
+#  phone           :string
+#  skype           :string
+#  admin           :boolean          default("f")
+#  email_confirmed :boolean          default("f")
+#  avatar_url      :string
+#
+
 require "spec_helper"
 require "rails_helper"
 
