@@ -6,7 +6,7 @@ ActiveAdmin.register Club do
   scope :confirmed, default: true
   scope :unconfirmed
 
-  permit_params Club.column_names
+  # permit_params Club.column_names
 
   index do
     id_column

@@ -6,7 +6,7 @@ ActiveAdmin.register Event do
   scope :not_started, default: true
   scope :started
 
-  permit_params Event.column_names
+  # permit_params Event.column_names
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

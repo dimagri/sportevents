@@ -2,7 +2,7 @@ ActiveAdmin.register ClubType do
 
   config.filters = false
 
-  permit_params ClubType.column_names
+  # permit_params ClubType.column_names
 
   index do
     id_column

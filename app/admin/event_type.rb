@@ -2,7 +2,7 @@ ActiveAdmin.register EventType do
 
   config.filters = false
 
-  permit_params EventType.column_names
+  # permit_params EventType.column_names
 
   index do
     id_column

@@ -2,7 +2,7 @@ ActiveAdmin.register User do
 
   config.filters = false
 
-  permit_params Club.column_names
+  # permit_params Club.column_names
 
   index do
     id_column
