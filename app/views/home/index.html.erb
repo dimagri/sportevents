@@ -32,5 +32,6 @@
     </p>
 <% end %>
 <br/>
-<%= link_to 'Секции', clubs_path %><br/>
-<%= link_to 'События', events_path %><br/>
+<!-- Workaround -->
+<%= link_to 'Секции', clubs_path, data: { no_turbolink: true } %><br/>
+<%= link_to 'События', events_path, data: { no_turbolink: true } %><br/>
