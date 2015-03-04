@@ -26,6 +26,6 @@ class Confirmation < ActiveRecord::Base
   end
 
   def send_email
-    UserMailer.email_confirmation(self.email, self.code).deliver_later
+    UserMailer.email_confirmation(self.user, self.email, self.code).deliver_later
   end
 end
