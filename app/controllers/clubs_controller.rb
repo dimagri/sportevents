@@ -14,8 +14,8 @@ class ClubsController < ApplicationController
     else
       search_hash = Club.search_confirmed
     end
-    @clubs, @message, @map_title = search_hash[:clubs], search_hash[:message], search_hash[:map_title]
-    @locationables = @clubs
+    @clubs, @message, @map_title = search_hash[:clubs].page(params[:page]), search_hash[:message], search_hash[:map_title]
+    @locationables = search_hash[:clubs]
     @club_types = ClubType.all
   end
 

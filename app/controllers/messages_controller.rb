@@ -1,11 +1,11 @@
 class MessagesController < ApplicationController
 
   def inbox
-  	@messages = current_user.recieved_messages 
+  	@messages = current_user.recieved_messages.page(params[:page])
   end
 
   def sentbox
-  	@messages = current_user.sent_messages
+  	@messages = current_user.sent_messages.page(params[:page])
   end
 
   def show

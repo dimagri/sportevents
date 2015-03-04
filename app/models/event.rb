@@ -18,6 +18,7 @@ class Event < ActiveRecord::Base
   include SportObject, EventSearch
 
   acts_as_readable :on => :created_at
+  paginates_per 15
 
   belongs_to :type, class_name: 'EventType', foreign_key: 'event_type_id'
 

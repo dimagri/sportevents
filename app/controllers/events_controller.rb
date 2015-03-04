@@ -14,8 +14,8 @@ class EventsController < ApplicationController
     else
       s_hash = Event.search_not_started
     end
-    @events, @message, @map_title = s_hash[:events], s_hash[:message], s_hash[:map_title]
-    @locationables = @events
+    @events, @message, @map_title = s_hash[:events].page(params[:page]), s_hash[:message], s_hash[:map_title]
+    @locationables = s_hash[:events]
     @event_types = EventType.all
   end
 

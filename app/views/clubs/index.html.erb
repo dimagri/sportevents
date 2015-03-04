@@ -18,3 +18,5 @@
     Добавил: <%= club.author.name %><br/>
     <hr/>
 <% end  %>
+
+<%= paginate @clubs, window: 2 %>

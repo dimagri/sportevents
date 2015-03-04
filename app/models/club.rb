@@ -18,6 +18,8 @@ class Club < ActiveRecord::Base
 
   include SportObject, ClubSearch
 
+  paginates_per 15
+
   belongs_to :type, class_name: 'ClubType', foreign_key: 'club_type_id'
 
   validates :club_type_id, presence: true
