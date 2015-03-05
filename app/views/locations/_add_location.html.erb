@@ -12,5 +12,6 @@
     <% end %>
 
     $(document).ready(addLocation());
-    $(document).on('page:load page:update page:change', addLocation());
+    $(document).on('page:load', addLocation());
+    $(document).on('page:change', addLocation());
 </script>

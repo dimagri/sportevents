@@ -17,7 +17,8 @@
     <% end %>
 
     $(document).ready(showMap());
-    $(document).on('page:load page:update page:change', showMap());
+    $(document).on('page:load', showMap());
+    $(document).on('page:change', showMap());
 </script>
 
 <div id="location"></div>

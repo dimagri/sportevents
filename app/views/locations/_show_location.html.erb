@@ -10,7 +10,8 @@
     var type = '<%= @locationable.type.name %>';
 
     $(document).ready(showLocation());
-    $(document).on('page ready page:ready page:load page:update page:change', showLocation());
+    $(document).on('page:load', showMap());
+    $(document).on('page:change', showLocation());
 
 </script>
 
