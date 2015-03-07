@@ -4,7 +4,7 @@ module OmniauthRegistration
   included do
     has_one :confirmation
 
-    validates :provider, :uid, presence: true
+    # validates :provider, :uid, presence: true
   end
 
   module ClassMethods

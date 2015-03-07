@@ -1,18 +1,14 @@
 class SessionsController < ApplicationController
 
-  def create
+  def login_with_email
+    @user = User.find_by_email(params[:email].downcase)
+    create_session(@user)
+  end
+
+  def login_with_oauth
     auth = request.env['omniauth.auth']
-    user = User.from_omniauth(auth)
-    session[:user_id] = user.id
-    # notice = user.email_confirmed? ? 'Успешный вход' : 'Успешный вход (настоятельно рекомендуем указать емейл в вашем профиле)'
-    notice = if user.email_confirmed?
-               'Успешный вход'
-             elsif user.email.present?
-               'Успешный вход. Настоятельно рекомендуем подтвердить свой адрес электронной почты'
-             else
-               'Успешный вход (настоятельно рекомендуем указать емейл в вашем профиле)'
-             end
-    redirect_to root_path, notice: notice
+    @user = User.from_omniauth(auth)
+    create_session(@user)
   end
 
   def destroy
@@ -22,5 +18,17 @@ class SessionsController < ApplicationController
 
   def failure
     redirect_to root_path, alert: 'Неудачный вход'
+  end
+
+  def create_session(user)
+    session[:user_id] = user.id
+    notice = if user.email_confirmed?
+               'Успешный вход'
+             elsif user.email.present?
+               'Успешный вход. Рекомендуем подтвердить свой адрес электронной почты'
+             else
+               'Успешный вход Рекомендуем указать емейл в вашем профиле'
+             end
+    redirect_to root_path, notice: notice
   end
 end

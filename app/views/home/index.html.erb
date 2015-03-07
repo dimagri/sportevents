@@ -17,11 +17,11 @@
     </ul>
     <p>
       <strong>Не используете эти сервисы?</strong>
-      Войдите, или <%= link_to 'создайте аккаунт', new_identity_path %>.
-      <%= form_tag '/auth/identity/callback' do %>
+      Войдите, или <%= link_to 'создайте аккаунт', new_user_path %>.
+      <%= form_tag 'login_with_email' do %>
         <div class="field">
-          <%= label_tag :auth_key, 'Email' %><br>
-          <%= text_field_tag :auth_key %>
+          <%= label_tag :email, 'Email' %><br>
+          <%= text_field_tag :email %>
         </div>
         <div class="field">
           <%= label_tag :password, 'Пароль' %><br>

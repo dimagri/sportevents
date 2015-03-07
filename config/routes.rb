@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000' # for development
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root 'home#index'
@@ -25,11 +27,12 @@ Rails.application.routes.draw do
   get 'sentbox' => 'messages#sentbox'
 
   # Authorization
-  get '/auth/:provider/callback' => 'sessions#create'
-  post '/auth/:provider/callback' => 'sessions#create'
+  post 'login_with_email' => 'sessions#login_with_email'
+  get '/auth/:provider/callback' => 'sessions#login_with_oauth'
+  post '/auth/:provider/callback' => 'sessions#login_with_oauth'
+  # resources :sessions
   get 'logout' => 'sessions#destroy'
   get '/auth/failure' => 'sessions#failure'
-  resources :identities
   get 'confirm_email' => 'users#confirm_email', as: 'confirm_email'
 
   # Locations

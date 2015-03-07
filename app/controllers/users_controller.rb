@@ -5,15 +5,28 @@ class UsersController < ApplicationController
   before_action :set_user, only: [ :show, :edit, :update ]
   before_action :check_user, only: [ :edit ]
 
-  # GET /user/:id
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    respond_to do |format|
+      if @user.save
+        @user.send_email_confirmation(params[:user][:email])
+        format.html { redirect_to root_path, notice: 'На вашу почту отправлено письмо с подтверждением' }
+      else
+        format.html { render :new }
+      end
+    end
+  end
+
   def show
   end
 
-  # GET /users/:id/edit
   def edit
   end
 
-  # PATCH/PUT /users/:id
   def update
     if params[:user][:email].present? && params[:user][:email] != @user.email
       @user.send_email_confirmation(params[:user][:email])
