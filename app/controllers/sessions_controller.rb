@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def login_with_email
     @user = User.find_by_email(params[:email].downcase)
-    create_session(@user)
+    @user ? create_session(@user) : failure
   end
 
   def login_with_oauth
